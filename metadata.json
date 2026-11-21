@@ -1,0 +1,6 @@
+{
+  "name": "Criel",
+  "description": "Criel — a brutally honest AI personal stylist and digital wardrobe with seasonal color analysis, outfit studio, look preview boards, smart shopping in INR, capsule trip planner, and wardrobe analytics.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

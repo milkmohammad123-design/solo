@@ -1,0 +1,2782 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>ATELIER AI — Editorial Personal Stylist & Digital Wardrobe</title>
+
+  <!-- Mobile PWA Meta Tags -->
+  <meta name="theme-color" content="#FAF8F5" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="ATELIER AI" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='24' fill='%23141414'/%3E%3Ctext x='50' y='67' font-family='Georgia,serif' font-size='54' fill='%23C6A46C' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E" />
+  <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' rx='38' fill='%23141414'/%3E%3Ctext x='90' y='118' font-family='Georgia,serif' font-size='92' fill='%23C6A46C' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E" />
+
+  <!-- Editorial Typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'Inter', 'system-ui', 'sans-serif'],
+            serif: ['"Playfair Display"', 'Georgia', 'serif'],
+          },
+          colors: {
+            alabaster: '#FAF8F5',
+            ivory: '#F2EFE9',
+            obsidian: '#141414',
+            obsidianBg: '#0C0C0E',
+            obsidianCard: '#151518',
+            champagne: '#C6A46C',
+            champagneLight: '#DFC38E',
+            champagneDark: '#9A783C',
+            taupe: '#E6E1D8',
+          },
+          boxShadow: {
+            editorial: '0 8px 30px -12px rgba(20, 20, 20, 0.07)',
+            editorialHover: '0 18px 44px -14px rgba(20, 20, 20, 0.14)',
+            goldGlow: '0 8px 24px -6px rgba(198, 164, 108, 0.38)',
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(198, 164, 108, 0.35); border-radius: 999px; }
+    body { -webkit-font-smoothing: antialiased; padding-bottom: env(safe-area-inset-bottom); }
+    .glass-panel { background: rgba(250, 248, 245, 0.9); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+    .dark .glass-panel { background: rgba(21, 21, 24, 0.9); }
+    @keyframes fadeSlideUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fade-up { animation: fadeSlideUp 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+    @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+    .shimmer-bg { background: linear-gradient(90deg, rgba(198,164,108,0.08) 25%, rgba(198,164,108,0.22) 50%, rgba(198,164,108,0.08) 75%); background-size: 200% 100%; animation: shimmer 1.5s infinite linear; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+    /* Freeform Collage Backdrops */
+    .backdrop-alabaster { background-color: #FAF8F5; }
+    .backdrop-linen { background-color: #EFECE3; background-image: radial-gradient(rgba(198,164,108,0.18) 1px, transparent 1px); background-size: 14px 14px; }
+    .backdrop-slate { background: linear-gradient(135deg, #212126 0%, #111114 100%); }
+    .backdrop-grid { background-color: #FAF8F5; background-image: linear-gradient(to right, rgba(20,20,20,0.05) 1px, transparent 1px), linear-gradient(to bottom, rgba(20,20,20,0.05) 1px, transparent 1px); background-size: 24px 24px; }
+    .collage-item { touch-action: none; user-select: none; cursor: grab; }
+    .collage-item:active { cursor: grabbing; }
+  </style>
+</head>
+<body class="bg-alabaster text-obsidian dark:bg-obsidianBg dark:text-ivory font-sans transition-colors duration-300 selection:bg-champagne/30">
+
+  <!-- ===================================================================== -->
+  <!-- APP SHELL: DESKTOP SIDEBAR + MAIN VIEWPORT + MOBILE BOTTOM NAV        -->
+  <!-- ===================================================================== -->
+  <div class="min-h-screen flex flex-col lg:flex-row">
+
+    <!-- Desktop Sidebar -->
+    <aside class="hidden lg:flex lg:flex-col lg:w-72 lg:fixed lg:inset-y-0 border-r border-taupe dark:border-white/10 bg-alabaster/95 dark:bg-obsidianCard/95 backdrop-blur-xl z-30">
+      <div class="p-6 flex flex-col h-full justify-between">
+        <div>
+          <!-- Masthead -->
+          <div class="mb-6">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-champagne"></span>
+                <h1 class="font-serif text-2xl tracking-[0.16em] font-semibold">ATELIER<span class="text-champagne font-normal italic ml-1">AI</span></h1>
+              </div>
+              <span class="text-[9px] uppercase tracking-widest px-2 py-0.5 rounded-full bg-champagne/15 border border-champagne/50 text-champagneDark dark:text-champagneLight font-bold">PRO FREE</span>
+            </div>
+            <p class="text-[10px] uppercase tracking-[0.22em] text-neutral-500 dark:text-neutral-400 mt-1">Editorial Personal Stylist</p>
+          </div>
+
+          <!-- Primary Navigation -->
+          <nav id="desktop-nav" class="space-y-1" aria-label="Primary Navigation"></nav>
+        </div>
+
+        <!-- Sidebar Footer -->
+        <div class="space-y-2.5 pt-4 border-t border-taupe dark:border-white/10">
+          <!-- Cloud Sync Pill -->
+          <button onclick="openSyncModal()" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-2xl bg-white/80 dark:bg-white/5 border border-taupe dark:border-white/10 hover:border-champagne transition text-left">
+            <div class="flex items-center gap-2 min-w-0">
+              <span id="sync-dot-desktop" class="w-2 h-2 rounded-full bg-amber-400 shrink-0"></span>
+              <span id="sync-label-desktop" class="text-xs font-medium truncate">Connecting...</span>
+            </div>
+            <span class="text-[10px] uppercase tracking-wider text-champagne">Sync</span>
+          </button>
+
+          <!-- Archive Mini Stats -->
+          <div class="p-3 rounded-2xl bg-white/80 dark:bg-white/5 border border-taupe/80 dark:border-white/10 flex items-center justify-between">
+            <div>
+              <div class="text-[10px] uppercase tracking-wider text-neutral-400">Closet</div>
+              <div id="sidebar-item-count" class="text-xs font-semibold text-champagne mt-0.5">12 pieces</div>
+            </div>
+            <div class="text-right">
+              <div class="text-[10px] uppercase tracking-wider text-neutral-400">Valuation</div>
+              <div id="sidebar-closet-value" class="font-serif text-base font-medium">$0</div>
+            </div>
+          </div>
+
+          <!-- Theme Toggle -->
+          <button onclick="toggleTheme()" class="w-full flex items-center justify-between px-3.5 py-2 rounded-2xl border border-taupe dark:border-white/10 bg-white/70 dark:bg-white/5 hover:border-champagne transition text-xs font-medium">
+            <span class="flex items-center gap-2">
+              <span id="theme-icon-desktop">🌙</span>
+              <span id="theme-label-desktop">Obsidian Mode</span>
+            </span>
+            <span class="text-[10px] uppercase tracking-widest text-champagne">Switch</span>
+          </button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Mobile Sticky Top Header -->
+    <header class="lg:hidden sticky top-0 z-30 glass-panel border-b border-taupe dark:border-white/10 px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <span class="w-2 h-2 rounded-full bg-champagne"></span>
+        <span class="font-serif text-lg tracking-[0.14em] font-semibold">ATELIER<span class="text-champagne font-normal italic ml-1">AI</span></span>
+        <span class="text-[9px] uppercase tracking-wider px-1.5 py-0.5 rounded-full bg-champagne/15 text-champagneDark dark:text-champagneLight font-bold">PRO</span>
+      </div>
+      <div class="flex items-center gap-1.5">
+        <button onclick="openWeatherDrawer()" class="px-2.5 py-1.5 rounded-full border border-champagne/50 bg-champagne/10 text-champagneDark dark:text-champagneLight text-[11px] font-semibold">🌡️ Weather</button>
+        <button onclick="openSyncModal()" class="p-2 rounded-full border border-taupe dark:border-white/15 bg-white/70 dark:bg-white/5 flex items-center" aria-label="Cloud Sync">
+          <span id="sync-dot-mobile" class="w-2 h-2 rounded-full bg-amber-400"></span>
+        </button>
+        <button onclick="toggleTheme()" class="p-1.5 rounded-full border border-taupe dark:border-white/15 bg-white/70 dark:bg-white/5 text-xs" aria-label="Toggle Theme">
+          <span id="theme-icon-mobile">🌙</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Content Viewport -->
+    <main class="flex-1 lg:pl-72 pb-24 lg:pb-12 min-h-screen w-full overflow-x-hidden">
+      <div id="app-content" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 py-5 lg:py-8"></div>
+    </main>
+
+    <!-- Mobile Fixed Bottom Tab Bar -->
+    <nav id="mobile-nav" class="lg:hidden fixed bottom-0 inset-x-0 z-30 glass-panel border-t border-taupe dark:border-white/10 px-1 py-1.5 flex items-center justify-around"></nav>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- DRAWER 1: MANUAL WEATHER CONTROL                                      -->
+  <!-- ===================================================================== -->
+  <div id="weather-drawer" class="fixed inset-0 z-50 hidden justify-end bg-black/55 backdrop-blur-sm">
+    <div id="weather-drawer-panel" class="w-full max-w-md bg-alabaster dark:bg-obsidianCard h-full overflow-y-auto border-l border-taupe dark:border-white/15 shadow-2xl p-6 space-y-5 animate-fade-up"></div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- MODAL 1: ADD GARMENT (CUTOUT + AI FLAT-LAY + GEMINI VISION)           -->
+  <!-- ===================================================================== -->
+  <div id="add-item-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
+    <div class="bg-alabaster dark:bg-obsidianCard border border-taupe dark:border-white/15 rounded-3xl w-full max-w-3xl max-h-[92vh] overflow-y-auto shadow-2xl animate-fade-up">
+      <div class="sticky top-0 z-10 glass-panel px-6 py-4 border-b border-taupe dark:border-white/10 flex items-center justify-between">
+        <div>
+          <h2 class="font-serif text-xl font-medium">Add Garment to Archive</h2>
+          <p class="text-xs text-neutral-500 dark:text-neutral-400">Studio Cutout · AI Flat-Lay · Gemini Vision Auto-Tag</p>
+        </div>
+        <button onclick="closeAddItemModal()" class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition" aria-label="Close">✕</button>
+      </div>
+
+      <form id="add-item-form" onsubmit="handleAddItemSubmit(event)" class="p-6 space-y-5">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 p-4 rounded-2xl bg-white dark:bg-white/5 border border-taupe dark:border-white/10">
+          <!-- Upload Preview -->
+          <div class="flex flex-col items-center justify-center border-2 border-dashed border-taupe dark:border-white/15 rounded-2xl p-3 min-h-[200px] relative overflow-hidden bg-ivory/60 dark:bg-black/20">
+            <img id="upload-preview-img" class="hidden max-w-full max-h-48 object-contain rounded-xl" alt="Garment Preview" />
+            <div id="upload-placeholder" class="text-center space-y-2 p-4">
+              <div class="w-10 h-10 mx-auto rounded-full bg-champagne/15 text-champagne flex items-center justify-center text-lg">📷</div>
+              <p class="text-xs font-medium">Upload or snap garment photo</p>
+              <p class="text-[11px] text-neutral-400">Or leave blank for custom SVG</p>
+            </div>
+            <input type="file" id="item-photo-input" accept="image/*" onchange="handlePhotoUpload(event)" class="absolute inset-0 opacity-0 cursor-pointer" />
+          </div>
+
+          <!-- Studio Cutout & AI Tools -->
+          <div class="flex flex-col justify-between space-y-3">
+            <div class="space-y-2.5">
+              <div class="text-[11px] uppercase tracking-widest text-champagne font-semibold">Studio Image Tools</div>
+              <div class="p-3 rounded-xl bg-ivory/70 dark:bg-white/5 border border-taupe/80 dark:border-white/10 space-y-2">
+                <div class="flex items-center justify-between text-xs">
+                  <span class="font-medium">Cutout Sensitivity</span>
+                  <span id="cutout-sens-label" class="text-champagne font-semibold">34</span>
+                </div>
+                <input type="range" id="cutout-sensitivity" min="10" max="85" value="34" oninput="document.getElementById('cutout-sens-label').textContent=this.value" class="w-full accent-champagne cursor-pointer" />
+                <div class="flex items-center gap-2">
+                  <button type="button" id="apply-cutout-btn" onclick="applyStudioCutout()" disabled class="flex-1 py-1.5 px-2.5 rounded-lg bg-obsidian text-alabaster dark:bg-white/15 dark:text-ivory text-[11px] font-medium disabled:opacity-35 transition">✂️ Studio Cutout</button>
+                  <button type="button" id="restore-photo-btn" onclick="restoreOriginalUpload()" disabled class="py-1.5 px-2.5 rounded-lg border border-taupe dark:border-white/15 text-[11px] disabled:opacity-35 transition">Restore</button>
+                </div>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                <button type="button" id="ai-flatlay-btn" onclick="enhanceToStudioFlatLay()" disabled class="py-2 px-3 rounded-xl border border-champagne text-champagneDark dark:text-champagneLight hover:bg-champagne hover:text-obsidian text-xs font-semibold disabled:opacity-35 transition">✦ AI Studio Flat-Lay</button>
+                <button type="button" id="ai-scan-btn" onclick="scanUploadedGarment()" disabled class="py-2 px-3 rounded-xl bg-champagne text-obsidian font-semibold text-xs shadow-goldGlow hover:bg-champagneLight disabled:opacity-35 transition">✦ Vision Auto-Tag</button>
+              </div>
+            </div>
+            <button type="button" id="clear-photo-btn" onclick="clearUploadedPhoto()" class="hidden w-full py-1 text-[11px] text-neutral-400 hover:text-red-500 transition text-center">Remove Photo</button>
+          </div>
+        </div>
+
+        <!-- Metadata Fields -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <div class="sm:col-span-2">
+            <label class="block text-[11px] uppercase tracking-wider text-neutral-500 mb-1">Garment Name *</label>
+            <input type="text" id="input-name" required placeholder="e.g., Double-Breasted Wool Blazer" class="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-taupe dark:border-white/15 focus:outline-none focus:border-champagne text-sm" />
+          </div>
+          <div>
+            <label class="block text-[11px] uppercase tracking-wider text-neutral-500 mb-1">Brand</label>
+            <input type="text" id="input-brand" placeholder="e.g., The Row, COS" class="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-taupe dark:border-white/15 focus:outline-none focus:border-champagne text-sm" />
+          </div>
+          <div>
+            <label class="block text-[11px] uppercase tracking-wider text-neutral-500 mb-1">Category *</label>
+            <select id="input-category" class="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-obsidianCard border border-taupe dark:border-white/15 text-sm">
+              <option value="Tops">Tops</option>
+              <option value="Bottoms">Bottoms</option>
+              <option value="Outerwear">Outerwear</option>
+              <option value="Footwear">Footwear</option>
+              <option value="Accessories">Accessories</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] uppercase tracking-wider text-neutral-500 mb-1">Fabric</label>
+            <input type="text" id="input-fabric" value="Cotton" placeholder="Wool, Silk, Linen" class="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-taupe dark:border-white/15 text-sm" />
+          </div>
+          <div>
+            <label class="block text-[11px] uppercase tracking-wider text-neutral-500 mb-1">Season</label>
+            <select id="input-season" class="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-obsidianCard border border-taupe dark:border-white/15 text-sm">
+              <option value="All-Season">All-Season</option>
+              <option value="Spring/Summer">Spring/Summer</option>
+              <option value="Fall/Winter">Fall/Winter</option>
+            </select>
+          </div>
+          <div class="sm:col-span-2">
+            <label class="block text-[11px] uppercase tracking-wider text-neutral-500 mb-1">Primary Color</label>
+            <div class="flex items-center gap-2">
+              <input type="color" id="input-color-hex" value="#141414" class="w-11 h-10 rounded-xl border border-taupe cursor-pointer bg-transparent" />
+              <input type="text" id="input-color-name" value="Obsidian Black" placeholder="Obsidian Black" class="flex-1 px-3.5 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-taupe dark:border-white/15 text-sm" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-[11px] uppercase tracking-wider text-neutral-500 mb-1">Price ($)</label>
+            <input type="number" id="input-price" min="0" step="1" value="185" class="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-taupe dark:border-white/15 text-sm" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-[11px] uppercase tracking-wider text-neutral-500 mb-1">Formality</label>
+            <select id="input-formality" class="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-obsidianCard border border-taupe dark:border-white/15 text-sm">
+              <option value="Smart Casual">Smart Casual</option>
+              <option value="Casual">Casual</option>
+              <option value="Formal">Formal</option>
+              <option value="Evening">Evening</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] uppercase tracking-wider text-neutral-500 mb-1">Tags (comma-separated)</label>
+            <input type="text" id="input-tags" placeholder="minimalist, tailored, quiet-luxury" class="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-taupe dark:border-white/15 text-sm" />
+          </div>
+        </div>
+
+        <div class="flex items-center justify-end gap-3 pt-2">
+          <button type="button" onclick="closeAddItemModal()" class="px-5 py-2.5 rounded-xl border border-taupe dark:border-white/15 text-sm font-medium">Cancel</button>
+          <button type="submit" class="px-6 py-2.5 rounded-xl bg-obsidian text-alabaster dark:bg-champagne dark:text-obsidian text-sm font-semibold">Add to Wardrobe</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- DRAWER 2: GARMENT DETAIL & EDIT                                       -->
+  <!-- ===================================================================== -->
+  <div id="garment-drawer" class="fixed inset-0 z-50 hidden justify-end bg-black/55 backdrop-blur-sm">
+    <div id="garment-drawer-panel" class="w-full max-w-md bg-alabaster dark:bg-obsidianCard h-full overflow-y-auto border-l border-taupe dark:border-white/15 shadow-2xl p-6 space-y-5 animate-fade-up"></div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- MODAL 2: STUDIO SLOT PICKER                                           -->
+  <!-- ===================================================================== -->
+  <div id="slot-picker-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/55 backdrop-blur-sm">
+    <div class="bg-alabaster dark:bg-obsidianCard border border-taupe dark:border-white/15 rounded-3xl w-full max-w-2xl max-h-[84vh] flex flex-col shadow-2xl animate-fade-up">
+      <div class="px-6 py-4 border-b border-taupe dark:border-white/10 flex items-center justify-between">
+        <div>
+          <h3 id="slot-picker-title" class="font-serif text-xl font-medium">Select Piece</h3>
+          <p class="text-xs text-neutral-500">Choose from your wardrobe or wishlist</p>
+        </div>
+        <button onclick="closeSlotPicker()" class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10">✕</button>
+      </div>
+      <div id="slot-picker-grid" class="p-5 grid grid-cols-2 sm:grid-cols-3 gap-3 overflow-y-auto"></div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- MODAL 3: SAVE LOOK                                                    -->
+  <!-- ===================================================================== -->
+  <div id="save-look-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/55 backdrop-blur-sm">
+    <div class="bg-alabaster dark:bg-obsidianCard border border-taupe dark:border-white/15 rounded-3xl w-full max-w-md p-6 shadow-2xl animate-fade-up space-y-4">
+      <div class="flex items-center justify-between">
+        <h3 class="font-serif text-xl font-medium">Save Editorial Look</h3>
+        <button onclick="closeSaveLookModal()" class="p-1.5 rounded-full hover:bg-black/5 dark:hover:bg-white/10">✕</button>
+      </div>
+      <div>
+        <label class="block text-xs uppercase tracking-wider text-neutral-500 mb-1">Look Title</label>
+        <input type="text" id="save-look-title-input" placeholder="e.g., Autumn Gallery Opening" class="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-taupe dark:border-white/15 text-sm" />
+      </div>
+      <div>
+        <label class="block text-xs uppercase tracking-wider text-neutral-500 mb-1">Occasion</label>
+        <input type="text" id="save-look-occasion-input" placeholder="e.g., Smart Office, Date Night" class="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-taupe dark:border-white/15 text-sm" />
+      </div>
+      <div>
+        <label class="block text-xs uppercase tracking-wider text-neutral-500 mb-1">Assign to Weekly Calendar (Optional)</label>
+        <select id="save-look-day-input" class="w-full px-4 py-2.5 rounded-xl bg-white dark:bg-obsidianBg border border-taupe dark:border-white/15 text-sm">
+          <option value="">Do not assign yet</option>
+          <option value="Monday">Monday</option>
+          <option value="Tuesday">Tuesday</option>
+          <option value="Wednesday">Wednesday</option>
+          <option value="Thursday">Thursday</option>
+          <option value="Friday">Friday</option>
+          <option value="Saturday">Saturday</option>
+          <option value="Sunday">Sunday</option>
+        </select>
+      </div>
+      <div class="flex justify-end gap-2 pt-2">
+        <button onclick="closeSaveLookModal()" class="px-4 py-2 rounded-xl border border-taupe dark:border-white/15 text-sm">Cancel</button>
+        <button onclick="confirmSaveStudioLook()" class="px-5 py-2 rounded-xl bg-obsidian text-alabaster dark:bg-champagne dark:text-obsidian text-sm font-semibold">Save Look</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- MODAL 4: ADD WISHLIST ITEM                                            -->
+  <!-- ===================================================================== -->
+  <div id="add-wishlist-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/55 backdrop-blur-sm">
+    <div class="bg-alabaster dark:bg-obsidianCard border border-taupe dark:border-white/15 rounded-3xl w-full max-w-md p-6 shadow-2xl animate-fade-up space-y-4">
+      <div class="flex items-center justify-between">
+        <h3 class="font-serif text-xl font-medium">Add to Wishlist</h3>
+        <button onclick="closeWishlistModal()" class="p-1.5 rounded-full hover:bg-black/5 dark:hover:bg-white/10">✕</button>
+      </div>
+      <form onsubmit="handleAddWishlistSubmit(event)" class="space-y-3.5">
+        <div>
+          <label class="block text-[11px] uppercase tracking-wider text-neutral-400 mb-1">Piece Name *</label>
+          <input type="text" id="wl-name" required placeholder="e.g., Espresso Suede Loafers" class="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-taupe dark:border-white/15 text-sm" />
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-[11px] uppercase tracking-wider text-neutral-400 mb-1">Category</label>
+            <select id="wl-category" class="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-obsidianBg border border-taupe dark:border-white/15 text-sm">
+              <option value="Outerwear">Outerwear</option>
+              <option value="Tops">Tops</option>
+              <option value="Bottoms">Bottoms</option>
+              <option value="Footwear">Footwear</option>
+              <option value="Accessories">Accessories</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-[11px] uppercase tracking-wider text-neutral-400 mb-1">Est. Price ($)</label>
+            <input type="number" id="wl-price" value="220" min="0" class="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-taupe dark:border-white/15 text-sm" />
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <input type="color" id="wl-color-hex" value="#4A3728" class="w-11 h-10 rounded-xl border border-taupe cursor-pointer bg-transparent" />
+          <input type="text" id="wl-color-name" value="Espresso Suede" placeholder="Color Name" class="flex-1 px-3.5 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-taupe dark:border-white/15 text-sm" />
+        </div>
+        <div>
+          <label class="block text-[11px] uppercase tracking-wider text-neutral-400 mb-1">Why It Unlocks Outfits</label>
+          <input type="text" id="wl-reason" placeholder="Pairs with wool trousers and raw denim" class="w-full px-3.5 py-2.5 rounded-xl bg-white dark:bg-white/5 border border-taupe dark:border-white/15 text-sm" />
+        </div>
+        <div class="flex justify-end gap-2 pt-2">
+          <button type="button" onclick="closeWishlistModal()" class="px-4 py-2 rounded-xl border border-taupe dark:border-white/15 text-sm">Cancel</button>
+          <button type="submit" class="px-5 py-2 rounded-xl bg-obsidian text-alabaster dark:bg-champagne dark:text-obsidian text-sm font-semibold">Save Wishlist</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- MODAL 5: CLOUD SYNC                                                   -->
+  <!-- ===================================================================== -->
+  <div id="sync-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/55 backdrop-blur-sm">
+    <div class="bg-alabaster dark:bg-obsidianCard border border-taupe dark:border-white/15 rounded-3xl w-full max-w-md p-6 shadow-2xl animate-fade-up space-y-4">
+      <div class="flex items-center justify-between">
+        <div>
+          <p class="text-[10px] uppercase tracking-[0.22em] text-champagne font-semibold">Cloud Archive</p>
+          <h3 class="font-serif text-xl font-medium">Sync Status</h3>
+        </div>
+        <button onclick="closeSyncModal()" class="p-1.5 rounded-full hover:bg-black/5 dark:hover:bg-white/10">✕</button>
+      </div>
+      <div id="sync-modal-body" class="space-y-4 text-sm"></div>
+    </div>
+  </div>
+
+  <!-- Toast Container -->
+  <div id="toast-container" class="fixed bottom-20 lg:bottom-6 right-4 lg:right-6 z-50 flex flex-col gap-2 pointer-events-none"></div>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import {
+      getAuth,
+      signInAnonymously,
+      signInWithCustomToken,
+      GoogleAuthProvider,
+      signInWithPopup,
+      signOut,
+      onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import {
+      getFirestore,
+      doc,
+      setDoc,
+      onSnapshot
+    } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    // =========================================================================
+    // 1. PWA MANIFEST & GEMINI API HELPERS
+    // =========================================================================
+    try {
+      const manifest = {
+        name: "ATELIER AI — Personal Stylist",
+        short_name: "ATELIER AI",
+        start_url: ".",
+        display: "standalone",
+        background_color: "#FAF8F5",
+        theme_color: "#141414"
+      };
+      const link = document.createElement('link');
+      link.rel = 'manifest';
+      link.href = URL.createObjectURL(new Blob([JSON.stringify(manifest)], { type: 'application/json' }));
+      document.head.appendChild(link);
+    } catch (_) {}
+
+    const apiKey = "";
+    const GEMINI_TEXT_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+    const GEMINI_IMAGE_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.1-flash-image:generateContent?key=${apiKey}`;
+
+    async function fetchWithRetry(url, options, maxRetries = 3) {
+      let delay = 1000;
+      for (let attempt = 0; attempt <= maxRetries; attempt++) {
+        try {
+          const response = await fetch(url, options);
+          if (response.ok) return await response.json();
+          if ((response.status === 429 || response.status >= 500) && attempt < maxRetries) {
+            await new Promise(r => setTimeout(r, delay));
+            delay *= 2;
+            continue;
+          }
+          throw new Error(`HTTP ${response.status}`);
+        } catch (err) {
+          if (attempt < maxRetries) {
+            await new Promise(r => setTimeout(r, delay));
+            delay *= 2;
+          } else {
+            throw err;
+          }
+        }
+      }
+    }
+
+    // =========================================================================
+    // 2. BESPOKE SVG EDITORIAL GARMENT ILLUSTRATIONS
+    // =========================================================================
+    function isLightColor(hex) {
+      if (!hex || !hex.startsWith('#')) return false;
+      const c = hex.replace('#', '');
+      const r = parseInt(c.substring(0, 2), 16) || 0;
+      const g = parseInt(c.substring(2, 4), 16) || 0;
+      const b = parseInt(c.substring(4, 6), 16) || 0;
+      return (0.299 * r + 0.587 * g + 0.114 * b) > 180;
+    }
+
+    function getGarmentSVG(category, colorHex = '#141414', silhouette = '') {
+      const stroke = isLightColor(colorHex) ? '#8C8478' : 'rgba(255,255,255,0.22)';
+      const accent = isLightColor(colorHex) ? '#141414' : '#FAF8F5';
+      const s = (silhouette || category).toLowerCase();
+
+      if (s.includes('trench') || s.includes('coat')) {
+        return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" class="w-full h-full drop-shadow-sm" fill="none">
+          <path d="M40 16 L60 28 L80 16 L96 26 L104 68 L88 70 L84 44 L86 106 L34 106 L36 44 L32 70 L16 68 L24 26 Z" fill="${colorHex}" stroke="${stroke}" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M40 16 L54 44 L60 28 L66 44 L80 16" stroke="${accent}" stroke-opacity="0.35" stroke-width="1.5"/>
+          <rect x="35" y="58" width="50" height="5" rx="2" fill="${colorHex}" stroke="${accent}" stroke-opacity="0.4" stroke-width="1"/>
+        </svg>`;
+      }
+      if (s.includes('blazer') || s.includes('jacket') || category === 'Outerwear') {
+        return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" class="w-full h-full drop-shadow-sm" fill="none">
+          <path d="M42 18 L60 32 L78 18 L96 28 L104 78 L88 80 L84 46 L84 98 L36 98 L36 46 L32 80 L16 78 L24 28 Z" fill="${colorHex}" stroke="${stroke}" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M42 18 L53 48 L60 32 L67 48 L78 18" stroke="${accent}" stroke-opacity="0.4" stroke-width="1.5"/>
+          <circle cx="60" cy="64" r="2" fill="${accent}" fill-opacity="0.55"/>
+        </svg>`;
+      }
+      if (s.includes('knit') || s.includes('sweater') || s.includes('turtleneck') || s.includes('cashmere') || s.includes('polo')) {
+        return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" class="w-full h-full drop-shadow-sm" fill="none">
+          <path d="M46 16 H74 V26 L94 34 L104 82 L88 84 L82 48 L82 100 H38 V48 L32 84 L16 82 L26 34 L46 26 Z" fill="${colorHex}" stroke="${stroke}" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M46 22 H74 M38 92 H82" stroke="${accent}" stroke-opacity="0.3" stroke-width="1.2"/>
+        </svg>`;
+      }
+      if (category === 'Tops') {
+        return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" class="w-full h-full drop-shadow-sm" fill="none">
+          <path d="M44 20 Q60 32 76 20 L98 34 L90 54 L80 48 L80 100 H40 V48 L30 54 L22 34 Z" fill="${colorHex}" stroke="${stroke}" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M44 20 Q60 34 76 20" stroke="${accent}" stroke-opacity="0.35" stroke-width="1.5"/>
+        </svg>`;
+      }
+      if (category === 'Bottoms') {
+        return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" class="w-full h-full drop-shadow-sm" fill="none">
+          <path d="M36 18 H84 L88 104 H66 L60 50 L54 104 H32 Z" fill="${colorHex}" stroke="${stroke}" stroke-width="1.5" stroke-linejoin="round"/>
+          <line x1="36" y1="26" x2="84" y2="26" stroke="${accent}" stroke-opacity="0.35" stroke-width="1.2"/>
+          <line x1="60" y1="26" x2="60" y2="44" stroke="${accent}" stroke-opacity="0.35" stroke-width="1.2"/>
+        </svg>`;
+      }
+      if (s.includes('boot') || s.includes('chelsea')) {
+        return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" class="w-full h-full drop-shadow-sm" fill="none">
+          <path d="M38 26 H68 V66 L94 74 C100 76 102 82 100 88 H34 V26 Z" fill="${colorHex}" stroke="${stroke}" stroke-width="1.5" stroke-linejoin="round"/>
+          <path d="M34 88 H100 V95 H64 V91 H50 V95 H34 Z" fill="#141414" stroke="${stroke}" stroke-width="1"/>
+        </svg>`;
+      }
+      if (category === 'Footwear') {
+        return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" class="w-full h-full drop-shadow-sm" fill="none">
+          <path d="M22 62 L44 50 L62 62 L94 68 C102 70 104 78 100 84 H20 Z" fill="${colorHex}" stroke="${stroke}" stroke-width="1.5" stroke-linejoin="round"/>
+          <rect x="20" y="83" width="80" height="7" rx="3" fill="${isLightColor(colorHex) ? '#D6D0C4' : '#262629'}" stroke="${stroke}" stroke-width="1"/>
+        </svg>`;
+      }
+      return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" class="w-full h-full drop-shadow-sm" fill="none">
+        <path d="M44 42 V30 C44 20 76 20 76 30 V42" stroke="${colorHex}" stroke-width="4" stroke-linecap="round"/>
+        <path d="M26 42 H94 L88 96 H32 Z" fill="${colorHex}" stroke="${stroke}" stroke-width="1.5" stroke-linejoin="round"/>
+        <rect x="54" y="52" width="12" height="7" rx="1.5" fill="#C6A46C"/>
+      </svg>`;
+    }
+
+    // =========================================================================
+    // 3. DATA & APPLICATION STATE
+    // =========================================================================
+    const WEATHER_CONDITIONS = [
+      { id: 'sunny',  label: 'Sunny',         icon: '☀️' },
+      { id: 'cloudy', label: 'Partly Cloudy', icon: '⛅' },
+      { id: 'rainy',  label: 'Rainy',         icon: '🌧️' },
+      { id: 'snowy',  label: 'Cold / Snow',   icon: '❄️' },
+      { id: 'windy',  label: 'Windy',         icon: '💨' },
+      { id: 'humid',  label: 'Humid',         icon: '💧' }
+    ];
+
+    const STARTER_WARDROBE = [
+      { id: 'item-1', name: 'Double-Breasted Wool Coat', brand: 'The Row', category: 'Outerwear', fabric: 'Virgin Wool', colorName: 'Camel Tan', colorHex: '#B8956A', season: 'Fall/Winter', formality: 'Formal', price: 890, wears: 9, tags: ['quiet-luxury', 'tailored'], image: null, createdAt: 1700000100000 },
+      { id: 'item-2', name: 'Structured Obsidian Blazer', brand: 'Acne Studios', category: 'Outerwear', fabric: 'Wool Gabardine', colorName: 'Obsidian Black', colorHex: '#141414', season: 'All-Season', formality: 'Formal', price: 540, wears: 14, tags: ['office', 'minimalist'], image: null, createdAt: 1700000200000 },
+      { id: 'item-3', name: 'Storm-Flap Waterproof Trench', brand: 'Burberry', category: 'Outerwear', fabric: 'Waterproof Cotton', colorName: 'Warm Stone', colorHex: '#CFC5B4', season: 'Spring/Summer', formality: 'Smart Casual', price: 780, wears: 5, tags: ['rainy-day', 'classic'], image: null, createdAt: 1700000300000 },
+      { id: 'item-4', name: 'Fine-Gauge Cashmere Turtleneck', brand: 'Loro Piana', category: 'Tops', fabric: '100% Cashmere', colorName: 'Alabaster Ivory', colorHex: '#EFECE6', season: 'Fall/Winter', formality: 'Smart Casual', price: 420, wears: 11, tags: ['quiet-luxury', 'layering'], image: null, createdAt: 1700000400000 },
+      { id: 'item-5', name: 'Heavyweight Boxy Cotton Tee', brand: 'COS', category: 'Tops', fabric: 'Organic Cotton', colorName: 'Chalk White', colorHex: '#F7F7F5', season: 'All-Season', formality: 'Casual', price: 65, wears: 24, tags: ['minimalist', 'essential'], image: null, createdAt: 1700000500000 },
+      { id: 'item-6', name: 'Relaxed Silk Camp Shirt', brand: 'Totême', category: 'Tops', fabric: 'Mulberry Silk', colorName: 'Deep Espresso', colorHex: '#3B2B23', season: 'Spring/Summer', formality: 'Evening', price: 310, wears: 0, tags: ['date-night', 'editorial'], image: null, createdAt: 1700000600000 },
+      { id: 'item-7', name: 'Pleated Wide-Leg Wool Trousers', brand: 'Studio Nicholson', category: 'Bottoms', fabric: 'Merino Wool', colorName: 'Charcoal Slate', colorHex: '#33353A', season: 'All-Season', formality: 'Smart Casual', price: 360, wears: 16, tags: ['tailored', 'office'], image: null, createdAt: 1700000700000 },
+      { id: 'item-8', name: 'Selvedge Raw Indigo Denim', brand: 'A.P.C.', category: 'Bottoms', fabric: 'Japanese Denim', colorName: 'Raw Indigo', colorHex: '#1F2B44', season: 'All-Season', formality: 'Casual', price: 245, wears: 19, tags: ['weekend', 'versatile'], image: null, createdAt: 1700000800000 },
+      { id: 'item-9', name: 'Tailored Linen Drawstring Pants', brand: 'Lemaire', category: 'Bottoms', fabric: 'Belgian Linen', colorName: 'Oatmeal Sand', colorHex: '#D8CBB8', season: 'Spring/Summer', formality: 'Casual', price: 290, wears: 0, tags: ['resort', 'warm-weather'], image: null, createdAt: 1700000900000 },
+      { id: 'item-10', name: 'Calfskin Lug-Sole Chelsea Boots', brand: 'Bottega Veneta', category: 'Footwear', fabric: 'Weatherproof Leather', colorName: 'Noir Black', colorHex: '#141416', season: 'Fall/Winter', formality: 'Smart Casual', price: 680, wears: 12, tags: ['rainy-day', 'evening'], image: null, createdAt: 1700001000000 },
+      { id: 'item-11', name: 'Minimalist Italian Leather Sneakers', brand: 'Common Projects', category: 'Footwear', fabric: 'Nappa Leather', colorName: 'Optic White', colorHex: '#F3F2EE', season: 'All-Season', formality: 'Casual', price: 410, wears: 26, tags: ['casual', 'travel'], image: null, createdAt: 1700001100000 },
+      { id: 'item-12', name: 'Architectural Leather Tote', brand: 'Polène', category: 'Accessories', fabric: 'Calfskin Leather', colorName: 'Cognac Saddle', colorHex: '#8B5A3C', season: 'All-Season', formality: 'Smart Casual', price: 460, wears: 8, tags: ['office', 'travel'], image: null, createdAt: 1700001200000 }
+    ];
+
+    const STARTER_LOOKS = [
+      { id: 'look-1', title: 'Parisian Gallery Evening', occasion: 'Evening', harmonyScore: 96, itemIds: ['item-2', 'item-4', 'item-7', 'item-10', 'item-12'], createdAt: new Date().toISOString() },
+      { id: 'look-2', title: 'Off-Duty SoHo Minimal', occasion: 'Weekend', harmonyScore: 93, itemIds: ['item-3', 'item-5', 'item-8', 'item-11'], createdAt: new Date().toISOString() }
+    ];
+
+    const STARTER_WISHLIST = [
+      { id: 'wl-1', name: 'Olive Merino Knit Polo', brand: 'Sunspel', category: 'Tops', fabric: 'Merino Wool', colorName: 'Deep Olive', colorHex: '#4F5D46', price: 240, season: 'All-Season', formality: 'Smart Casual', reason: 'Introduces a rich earthy accent that multiplies pairings with camel, charcoal, and raw indigo.', unlocks: '+5 outfits', isWishlist: true }
+    ];
+
+    const DAYS_OF_WEEK = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    const STUDIO_CATEGORIES = ['Outerwear', 'Tops', 'Bottoms', 'Footwear', 'Accessories'];
+
+    let state = {
+      activeTab: 'wardrobe',
+      darkMode: false,
+      wardrobe: [...STARTER_WARDROBE],
+      savedLooks: [...STARTER_LOOKS],
+      wishlist: [...STARTER_WISHLIST],
+      weeklyPlan: {
+        Monday: { lookId: 'look-1', worn: false },
+        Friday: { lookId: 'look-2', worn: false }
+      },
+      weather: {
+        city: 'Local Forecast',
+        tempC: 16,
+        unit: 'C',
+        conditionId: 'cloudy',
+        conditionLabel: 'Partly Cloudy',
+        icon: '⛅',
+        isManual: false,
+        loading: false,
+        liveBackup: null
+      },
+      wardrobeFilter: 'All',
+      wardrobeSeason: 'All',
+      wardrobeColorFilter: 'All',
+      wardrobeSearch: '',
+      chatMessages: [
+        {
+          role: 'assistant',
+          text: "Welcome to ATELIER AI. I'm synced with your 12-piece archive and live/manual weather bar. Ask me to style you for today's climate, audit your palette, or roast your closet.",
+          outfit: null
+        }
+      ],
+      studioMode: 'slots',
+      studioTitle: 'Atelier Signature Look',
+      studioSlots: { Outerwear: 'item-1', Tops: 'item-4', Bottoms: 'item-7', Footwear: 'item-10', Accessories: 'item-12' },
+      studioLocks: { Outerwear: false, Tops: false, Bottoms: false, Footwear: false, Accessories: false },
+      collageItems: [],
+      collageSelectedId: null,
+      collageBackdrop: 'alabaster',
+      tryOnProfile: 'Unisex',
+      tryOnSetting: 'Studio Editorial',
+      tryOnUserPhoto: null,
+      tryOnResultImage: null,
+      tryOnFallbackMode: false,
+      tryOnLoading: false,
+      gapResults: [],
+      gapLoading: false,
+      tripPlan: null,
+      tripForm: { destination: 'Milan, Italy', days: 4, vibe: 'City Break' },
+      tripLoading: false
+    };
+
+    let originalUploadDataUrl = null;
+    let currentUploadDataUrl = null;
+
+    // =========================================================================
+    // 4. CLOUD SYNC (FIREBASE AUTH + FIRESTORE WITH GRACEFUL FALLBACK)
+    // =========================================================================
+    let db = null;
+    let auth = null;
+    let currentUser = null;
+    let unsubscribeSnapshot = null;
+    let syncStatus = 'offline';
+    let isApplyingRemoteUpdate = false;
+    let saveTimer = null;
+
+    const appId = typeof __app_id !== 'undefined' ? __app_id : 'atelier-ai-app';
+
+    async function initCloudSync() {
+      if (typeof __firebase_config === 'undefined' || !__firebase_config) {
+        syncStatus = 'offline';
+        updateSyncUI();
+        return;
+      }
+      try {
+        syncStatus = 'connecting';
+        updateSyncUI();
+        const firebaseConfig = typeof __firebase_config === 'string' ? JSON.parse(__firebase_config) : __firebase_config;
+        const app = initializeApp(firebaseConfig);
+        db = getFirestore(app);
+        auth = getAuth(app);
+
+        // RULE 3: Authenticate FIRST before any Firestore operation
+        if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+          await signInWithCustomToken(auth, __initial_auth_token);
+        } else {
+          await signInAnonymously(auth);
+        }
+
+        onAuthStateChanged(auth, (user) => {
+          currentUser = user;
+          if (user) attachFirestoreListener(user.uid);
+          else {
+            if (unsubscribeSnapshot) unsubscribeSnapshot();
+            syncStatus = 'offline';
+            updateSyncUI();
+          }
+        });
+      } catch (_) {
+        syncStatus = 'offline';
+        updateSyncUI();
+      }
+    }
+
+    function attachFirestoreListener(userId) {
+      if (!db || !userId) return;
+      if (unsubscribeSnapshot) unsubscribeSnapshot();
+      // RULE 1: Strict user-scoped path
+      const stateRef = doc(db, 'artifacts', appId, 'users', userId, 'atelierData', 'state');
+      // RULE 2: Simple document listener with required error callback
+      unsubscribeSnapshot = onSnapshot(
+        stateRef,
+        (snap) => {
+          syncStatus = 'synced';
+          updateSyncUI();
+          if (snap.exists()) {
+            const data = snap.data();
+            isApplyingRemoteUpdate = true;
+            if (Array.isArray(data.wardrobe) && data.wardrobe.length) state.wardrobe = data.wardrobe;
+            if (Array.isArray(data.savedLooks)) state.savedLooks = data.savedLooks;
+            if (Array.isArray(data.wishlist)) state.wishlist = data.wishlist;
+            if (data.weeklyPlan) state.weeklyPlan = data.weeklyPlan;
+            if (data.weather) state.weather = { ...state.weather, ...data.weather, loading: false };
+            if (typeof data.darkMode === 'boolean') { state.darkMode = data.darkMode; applyTheme(); }
+            if (data.studioSlots) state.studioSlots = data.studioSlots;
+            if (data.tripPlan) state.tripPlan = data.tripPlan;
+            isApplyingRemoteUpdate = false;
+            updateSidebarStats();
+            renderActiveView();
+          } else {
+            persistToCloud();
+          }
+        },
+        () => {
+          syncStatus = 'offline';
+          updateSyncUI();
+        }
+      );
+    }
+
+    function persistState() {
+      updateSidebarStats();
+      if (isApplyingRemoteUpdate || !db || !currentUser) return;
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(persistToCloud, 450);
+    }
+
+    async function persistToCloud() {
+      if (!db || !currentUser) return;
+      try {
+        const stateRef = doc(db, 'artifacts', appId, 'users', currentUser.uid, 'atelierData', 'state');
+        await setDoc(stateRef, {
+          wardrobe: state.wardrobe,
+          savedLooks: state.savedLooks,
+          wishlist: state.wishlist,
+          weeklyPlan: state.weeklyPlan,
+          weather: {
+            city: state.weather.city, tempC: state.weather.tempC, unit: state.weather.unit,
+            conditionId: state.weather.conditionId, conditionLabel: state.weather.conditionLabel,
+            icon: state.weather.icon, isManual: state.weather.isManual
+          },
+          darkMode: state.darkMode,
+          studioSlots: state.studioSlots,
+          tripPlan: state.tripPlan,
+          updatedAt: Date.now()
+        }, { merge: true });
+        syncStatus = 'synced';
+        updateSyncUI();
+      } catch (_) {
+        syncStatus = 'offline';
+        updateSyncUI();
+      }
+    }
+
+    async function handleGoogleSignIn() {
+      if (!auth) { showToast('Running in local session mode', 'gold'); return; }
+      try {
+        await signInWithPopup(auth, new GoogleAuthProvider());
+        showToast('Signed in with Google — Cloud Sync active!', 'gold');
+        closeSyncModal();
+      } catch (_) {
+        showToast('Anonymous Cloud Sync is already active.', 'warning');
+      }
+    }
+
+    async function handleCloudSignOut() {
+      if (!auth) return;
+      try {
+        await signOut(auth);
+        await signInAnonymously(auth);
+        showToast('Switched to anonymous session');
+        closeSyncModal();
+      } catch (_) {}
+    }
+
+    function updateSyncUI() {
+      const dotD = document.getElementById('sync-dot-desktop');
+      const dotM = document.getElementById('sync-dot-mobile');
+      const lblD = document.getElementById('sync-label-desktop');
+      const cls = syncStatus === 'synced' ? 'bg-emerald-500' : syncStatus === 'connecting' ? 'bg-amber-400 animate-pulse' : 'bg-champagne';
+      if (dotD) dotD.className = `w-2 h-2 rounded-full shrink-0 ${cls}`;
+      if (dotM) dotM.className = `w-2 h-2 rounded-full ${cls}`;
+      if (lblD) lblD.textContent = syncStatus === 'synced' ? 'Cloud Synced' : syncStatus === 'connecting' ? 'Syncing...' : 'Local Session';
+    }
+
+    function openSyncModal() {
+      const uid = currentUser?.uid || 'Local Offline Session';
+      const isGoogle = currentUser && !currentUser.isAnonymous;
+      document.getElementById('sync-modal-body').innerHTML = `
+        <div class="p-4 rounded-2xl bg-white dark:bg-white/5 border border-taupe dark:border-white/10 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs uppercase tracking-wider text-neutral-400">Status</span>
+            <span class="px-2.5 py-0.5 rounded-full text-xs font-semibold ${syncStatus === 'synced' ? 'bg-emerald-500/15 text-emerald-600 dark:text-emerald-400' : 'bg-champagne/15 text-champagne'}">
+              ${syncStatus === 'synced' ? '● Cloud Synced' : '● Offline Ready'}
+            </span>
+          </div>
+          <div class="text-xs text-neutral-500 break-all"><span class="font-medium text-obsidian dark:text-ivory">User ID:</span> ${escapeHtml(uid)}</div>
+        </div>
+        <p class="text-xs text-neutral-500 leading-relaxed">Your wardrobe, looks, wishlist, trip plans, and calendar sync automatically via Cloud Storage when connected, and work seamlessly offline.</p>
+        <div class="flex flex-col gap-2">
+          ${!isGoogle ? `<button onclick="handleGoogleSignIn()" class="w-full py-2.5 rounded-xl bg-obsidian text-alabaster dark:bg-champagne dark:text-obsidian text-xs font-semibold">Connect Google Account</button>`
+                      : `<button onclick="handleCloudSignOut()" class="w-full py-2.5 rounded-xl border border-taupe dark:border-white/15 text-xs hover:text-red-500">Sign Out</button>`}
+          <button onclick="closeSyncModal()" class="w-full py-2 rounded-xl text-xs text-neutral-500">Close</button>
+        </div>`;
+      document.getElementById('sync-modal').classList.remove('hidden');
+      document.getElementById('sync-modal').classList.add('flex');
+    }
+    function closeSyncModal() { document.getElementById('sync-modal').classList.add('hidden'); document.getElementById('sync-modal').classList.remove('flex'); }
+
+    // =========================================================================
+    // 5. LIVE + MANUAL WEATHER STYLING BAR
+    // =========================================================================
+    function formatTemp(tempC) {
+      return state.weather.unit === 'F' ? `${Math.round((tempC * 9) / 5 + 32)}°F` : `${Math.round(tempC)}°C`;
+    }
+
+    function getWeatherDisplayVal(tempC) {
+      return state.weather.unit === 'F' ? Math.round((tempC * 9) / 5 + 32) : Math.round(tempC);
+    }
+
+    function mapOpenMeteoCode(code, tempC) {
+      if ([71, 73, 75, 77, 85, 86].includes(code)) return WEATHER_CONDITIONS.find(c => c.id === 'snowy');
+      if ([51, 53, 55, 61, 63, 65, 80, 81, 82, 95, 96, 99].includes(code)) return WEATHER_CONDITIONS.find(c => c.id === 'rainy');
+      if ([0, 1].includes(code)) return WEATHER_CONDITIONS.find(c => c.id === 'sunny');
+      if (tempC >= 30) return WEATHER_CONDITIONS.find(c => c.id === 'humid');
+      return WEATHER_CONDITIONS.find(c => c.id === 'cloudy');
+    }
+
+    async function fetchWeatherByCoords(lat, lon, cityLabel = 'Local Forecast') {
+      state.weather.loading = true;
+      renderActiveView();
+      try {
+        const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,weather_code&timezone=auto`);
+        const data = await res.json();
+        const tempC = Math.round(data?.current?.temperature_2m ?? 16);
+        const cond = mapOpenMeteoCode(data?.current?.weather_code ?? 2, tempC);
+        const snap = { city: cityLabel, tempC, conditionId: cond.id, conditionLabel: cond.label, icon: cond.icon };
+        state.weather = { ...state.weather, ...snap, isManual: false, loading: false, liveBackup: snap };
+        persistState();
+      } catch (_) { state.weather.loading = false; }
+      renderActiveView();
+      renderWeatherDrawerContent();
+    }
+
+    function detectLocalWeather() {
+      if (!navigator.geolocation) return;
+      state.weather.loading = true;
+      renderActiveView();
+      navigator.geolocation.getCurrentPosition(
+        (pos) => fetchWeatherByCoords(pos.coords.latitude, pos.coords.longitude, 'Your Location'),
+        () => { state.weather.loading = false; renderActiveView(); },
+        { timeout: 5000 }
+      );
+    }
+
+    async function searchWeatherCity(e) {
+      e.preventDefault();
+      const q = document.getElementById('weather-city-input')?.value?.trim();
+      if (!q) return;
+      state.weather.loading = true;
+      renderActiveView();
+      try {
+        const res = await fetch(`https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(q)}&count=1&language=en&format=json`);
+        const data = await res.json();
+        const place = data?.results?.[0];
+        if (!place) { state.weather.loading = false; renderActiveView(); showToast(`City "${q}" not found`, 'warning'); return; }
+        await fetchWeatherByCoords(place.latitude, place.longitude, `${place.name}${place.country_code ? ', ' + place.country_code : ''}`);
+        showToast(`Live weather loaded for ${place.name}`, 'gold');
+      } catch (_) {
+        state.weather.loading = false;
+        renderActiveView();
+        showToast('Lookup failed — use Manual Weather controls', 'warning');
+      }
+    }
+
+    function openWeatherDrawer() {
+      renderWeatherDrawerContent();
+      document.getElementById('weather-drawer').classList.remove('hidden');
+      document.getElementById('weather-drawer').classList.add('flex');
+    }
+    function closeWeatherDrawer() {
+      document.getElementById('weather-drawer').classList.add('hidden');
+      document.getElementById('weather-drawer').classList.remove('flex');
+    }
+
+    function updateManualTempFromC(valC) {
+      state.weather.tempC = Math.max(-20, Math.min(50, Number(valC)));
+      state.weather.isManual = true;
+      persistState();
+      renderWeatherDrawerContent();
+      renderActiveView();
+    }
+
+    function updateManualTempInput(val) {
+      const n = Number(val);
+      if (Number.isNaN(n)) return;
+      const c = state.weather.unit === 'F' ? ((n - 32) * 5) / 9 : n;
+      updateManualTempFromC(Math.round(c));
+    }
+
+    function toggleTempUnit(unit) {
+      state.weather.unit = unit;
+      persistState();
+      renderWeatherDrawerContent();
+      renderActiveView();
+    }
+
+    function selectManualCondition(condId) {
+      const c = WEATHER_CONDITIONS.find(x => x.id === condId);
+      if (!c) return;
+      state.weather.conditionId = c.id;
+      state.weather.conditionLabel = c.label;
+      state.weather.icon = c.icon;
+      state.weather.isManual = true;
+      persistState();
+      renderWeatherDrawerContent();
+      renderActiveView();
+    }
+
+    function resetToLiveWeather() {
+      if (state.weather.liveBackup) {
+        state.weather = { ...state.weather, ...state.weather.liveBackup, isManual: false };
+        persistState();
+        renderWeatherDrawerContent();
+        renderActiveView();
+        showToast(`Reset to live weather (${state.weather.city})`, 'gold');
+      } else {
+        detectLocalWeather();
+        showToast('Fetching live local weather...');
+      }
+    }
+
+    function renderWeatherDrawerContent() {
+      const panel = document.getElementById('weather-drawer-panel');
+      if (!panel) return;
+      const w = state.weather;
+      panel.innerHTML = `
+        <div class="flex items-center justify-between pb-4 border-b border-taupe dark:border-white/10">
+          <div>
+            <p class="text-[10px] uppercase tracking-[0.22em] text-champagne font-semibold">Manual Climate Override</p>
+            <h3 class="font-serif text-2xl font-medium">Set Weather Manually</h3>
+          </div>
+          <button onclick="closeWeatherDrawer()" class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10">✕</button>
+        </div>
+
+        <div class="p-5 rounded-3xl bg-white dark:bg-white/5 border border-taupe dark:border-white/10 space-y-4">
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="text-[10px] uppercase tracking-widest text-neutral-400">Temperature</div>
+              <div class="font-serif text-3xl font-medium mt-1 flex items-center gap-2"><span>${w.icon}</span><span>${formatTemp(w.tempC)}</span></div>
+            </div>
+            <div class="inline-flex p-1 rounded-xl bg-ivory dark:bg-white/10 border border-taupe dark:border-white/10">
+              <button onclick="toggleTempUnit('C')" class="px-3 py-1 rounded-lg text-xs font-semibold ${w.unit === 'C' ? 'bg-obsidian text-alabaster dark:bg-champagne dark:text-obsidian' : 'text-neutral-500'}">°C</button>
+              <button onclick="toggleTempUnit('F')" class="px-3 py-1 rounded-lg text-xs font-semibold ${w.unit === 'F' ? 'bg-obsidian text-alabaster dark:bg-champagne dark:text-obsidian' : 'text-neutral-500'}">°F</button>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-3">
+            <input type="range" min="-10" max="45" step="1" value="${w.tempC}" oninput="updateManualTempFromC(this.value)" class="flex-1 accent-champagne cursor-pointer" />
+            <input type="number" value="${getWeatherDisplayVal(w.tempC)}" onchange="updateManualTempInput(this.value)" class="w-20 px-2.5 py-1.5 rounded-xl bg-ivory dark:bg-obsidianBg border border-taupe dark:border-white/15 text-xs text-center font-semibold" />
+          </div>
+        </div>
+
+        <div class="space-y-2.5">
+          <div class="text-[11px] uppercase tracking-widest text-neutral-400 font-semibold">Condition</div>
+          <div class="grid grid-cols-2 gap-2">
+            ${WEATHER_CONDITIONS.map(c => `
+              <button onclick="selectManualCondition('${c.id}')" class="p-3 rounded-2xl border text-left transition flex items-center gap-2.5 ${
+                w.conditionId === c.id
+                  ? 'bg-obsidian text-alabaster border-obsidian dark:bg-champagne dark:text-obsidian dark:border-champagne shadow-editorial'
+                  : 'bg-white dark:bg-white/5 border-taupe dark:border-white/10 hover:border-champagne'
+              }">
+                <span class="text-xl">${c.icon}</span>
+                <span class="text-xs font-medium">${c.label}</span>
+              </button>
+            `).join('')}
+          </div>
+        </div>
+
+        <div class="flex gap-2 pt-2">
+          <button onclick="resetToLiveWeather()" class="px-4 py-3 rounded-2xl border border-taupe dark:border-white/15 text-xs font-semibold hover:border-champagne">↺ Live Weather</button>
+          <button onclick="closeWeatherDrawer(); styleForActiveWeather()" class="flex-1 py-3 px-4 rounded-2xl bg-champagne text-obsidian text-xs font-bold shadow-goldGlow hover:bg-champagneLight transition">✦ Style Me for This Weather</button>
+        </div>`;
+    }
+
+    function renderWeatherBar() {
+      const w = state.weather;
+      return `
+        <div class="p-4 rounded-3xl bg-white dark:bg-obsidianCard border border-taupe dark:border-white/10 shadow-editorial flex flex-col xl:flex-row xl:items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <button onclick="openWeatherDrawer()" class="w-11 h-11 rounded-2xl bg-ivory dark:bg-white/5 border border-taupe/80 dark:border-white/10 flex items-center justify-center text-xl shrink-0 hover:border-champagne transition">
+              ${w.loading ? '<span class="animate-spin text-sm">◌</span>' : w.icon}
+            </button>
+            <div class="min-w-0">
+              <div class="flex items-center gap-2">
+                <span class="text-[10px] uppercase tracking-[0.22em] text-champagne font-semibold">${w.isManual ? 'Manual Weather' : 'Live Weather'}</span>
+                ${w.isManual ? `<button onclick="resetToLiveWeather()" class="text-[10px] text-neutral-400 hover:text-champagne underline">Reset Live</button>`
+                             : `<button onclick="detectLocalWeather()" class="text-[10px] text-neutral-400 hover:text-champagne underline">Detect</button>`}
+              </div>
+              <div class="flex items-baseline gap-2 mt-0.5 flex-wrap">
+                <span class="font-serif text-xl font-medium">${formatTemp(w.tempC)}</span>
+                <span class="text-xs font-semibold">${escapeHtml(w.conditionLabel)}</span>
+                <span class="text-xs text-neutral-400">· ${w.isManual ? 'Custom Override' : escapeHtml(w.city)}</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2">
+            <form onsubmit="searchWeatherCity(event)" class="flex items-center gap-1.5">
+              <input type="text" id="weather-city-input" placeholder="Search city..." class="w-28 sm:w-36 px-3 py-2 rounded-xl bg-ivory/70 dark:bg-white/5 border border-taupe dark:border-white/10 text-xs focus:outline-none focus:border-champagne" />
+              <button type="submit" class="px-3 py-2 rounded-xl border border-taupe dark:border-white/10 text-xs font-medium hover:border-champagne">Go</button>
+            </form>
+            <button onclick="openWeatherDrawer()" class="px-3 py-2 rounded-xl border border-champagne bg-champagne/10 text-champagneDark dark:text-champagneLight hover:bg-champagne hover:text-obsidian text-xs font-semibold transition">🎛️ Manual</button>
+            <button onclick="styleForActiveWeather()" class="px-4 py-2 rounded-xl bg-obsidian text-alabaster dark:bg-champagne dark:text-obsidian text-xs font-semibold hover:opacity-90 transition">✦ Style Me for This Weather</button>
+          </div>
+        </div>`;
+    }
+
+    function styleForActiveWeather() {
+      const w = state.weather;
+      switchTab('stylist');
+      sendStylistPrompt(`Style me a complete outfit from my closet for ${formatTemp(w.tempC)} and ${w.conditionLabel} weather (${w.isManual ? 'manual override' : w.city}). Explain why each layer fits these exact conditions.`);
+    }
+
+    // =========================================================================
+    // 6. CORE UTILITIES, NAVIGATION & THEME
+    // =========================================================================
+    function escapeHtml(str) {
+      return String(str ?? '').replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+    function getItemById(id) { return state.wardrobe.find(i => i.id === id) || null; }
+    function getAnyItemById(id) { return state.wardrobe.find(i => i.id === id) || state.wishlist.find(w => w.id === id) || null; }
+
+    function renderItemThumbnail(item, sizeClass = 'w-full h-full') {
+      if (!item) return '';
+      if (item.image) return `<img src="${item.image}" alt="${escapeHtml(item.name)}" class="${sizeClass} object-contain rounded-xl" />`;
+      return `<div class="${sizeClass} flex items-center justify-center p-1.5">${getGarmentSVG(item.category, item.colorHex, item.name)}</div>`;
+    }
+
+    function computeCPW(item) {
+      const price = Number(item.price) || 0, wears = Number(item.wears) || 0;
+      if (wears === 0) return price > 0 ? `$${price} (0 wears)` : 'Unworn';
+      return `$${(price / wears).toFixed(0)}/wear`;
+    }
+
+    function showToast(message, type = 'default') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      const cls = type === 'gold'
+        ? 'border-champagne bg-obsidian text-alabaster dark:bg-champagne dark:text-obsidian'
+        : type === 'warning'
+        ? 'border-amber-500/50 bg-obsidian text-amber-200'
+        : 'border-taupe dark:border-white/15 bg-obsidian text-alabaster dark:bg-ivory dark:text-obsidian';
+      toast.className = `pointer-events-auto px-4 py-3 rounded-2xl border shadow-xl text-xs sm:text-sm font-medium flex items-center gap-2.5 animate-fade-up ${cls}`;
+      toast.innerHTML = `<span class="w-1.5 h-1.5 rounded-full bg-champagne shrink-0"></span><span>${escapeHtml(message)}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => { toast.style.opacity = '0'; toast.style.transform = 'translateY(8px)'; toast.style.transition = 'all 0.25s ease'; setTimeout(() => toast.remove(), 260); }, 3200);
+    }
+
+    function applyTheme() {
+      document.documentElement.classList.toggle('dark', state.darkMode);
+      const dIcon = document.getElementById('theme-icon-desktop');
+      const dLabel = document.getElementById('theme-label-desktop');
+      const mIcon = document.getElementById('theme-icon-mobile');
+      if (dIcon) dIcon.textContent = state.darkMode ? '☀️' : '🌙';
+      if (dLabel) dLabel.textContent = state.darkMode ? 'Alabaster Mode' : 'Obsidian Mode';
+      if (mIcon) mIcon.textContent = state.darkMode ? '☀️' : '🌙';
+    }
+    function toggleTheme() { state.darkMode = !state.darkMode; applyTheme(); persistState(); }
+
+    const NAV_ITEMS = [
+      { id: 'wardrobe', label: 'Wardrobe',          short: 'Closet',  icon: '🧥' },
+      { id: 'stylist',  label: 'AI Stylist',        short: 'Stylist', icon: '✦' },
+      { id: 'studio',   label: 'Outfit Studio',     short: 'Studio',  icon: '❖' },
+      { id: 'gaps',     label: 'Gaps & Wishlist',   short: 'Gaps',    icon: '✧' },
+      { id: 'pack',     label: 'Pack My Bag',       short: 'Pack',    icon: '🧳' },
+      { id: 'calendar', label: 'Calendar & Insights', short: 'Insights', icon: '◈' }
+    ];
+
+    function renderNavigation() {
+      document.getElementById('desktop-nav').innerHTML = NAV_ITEMS.map(item => {
+        const active = state.activeTab === item.id;
+        return `
+          <button onclick="switchTab('${item.id}')" class="w-full flex items-center justify-between px-4 py-2.5 rounded-2xl transition-all text-sm ${
+            active ? 'bg-obsidian text-alabaster dark:bg-champagne dark:text-obsidian font-semibold shadow-editorial'
+                   : 'text-neutral-600 dark:text-neutral-300 hover:bg-black/5 dark:hover:bg-white/5 font-medium'
+          }">
+            <span class="flex items-center gap-3"><span class="text-base w-5 text-center">${item.icon}</span><span>${item.label}</span></span>
+            ${active ? '<span class="w-1.5 h-1.5 rounded-full bg-champagne dark:bg-obsidian"></span>' : ''}
+          </button>`;
+      }).join('');
+
+      document.getElementById('mobile-nav').innerHTML = NAV_ITEMS.map(item => {
+        const active = state.activeTab === item.id;
+        return `
+          <button onclick="switchTab('${item.id}')" class="flex-1 flex flex-col items-center justify-center py-1.5 rounded-xl transition-all ${
+            active ? 'text-obsidian dark:text-champagne font-semibold' : 'text-neutral-400 dark:text-neutral-500'
+          }">
+            <span class="text-base leading-none mb-1">${item.icon}</span>
+            <span class="text-[9px] tracking-wide">${item.short}</span>
+          </button>`;
+      }).join('');
+    }
+
+    function updateSidebarStats() {
+      const cEl = document.getElementById('sidebar-item-count');
+      const vEl = document.getElementById('sidebar-closet-value');
+      if (cEl) cEl.textContent = `${state.wardrobe.length} pieces`;
+      if (vEl) vEl.textContent = `$${state.wardrobe.reduce((s, i) => s + (Number(i.price) || 0), 0).toLocaleString()}`;
+    }
+
+    function switchTab(tabId) {
+      state.activeTab = tabId;
+      if (tabId === 'studio' && state.collageItems.length === 0) syncCollageFromSlots();
+      renderNavigation();
+      renderActiveView();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderActiveView() {
+      const container = document.getElementById('app-content');
+      if (!container) return;
+      if (state.activeTab === 'wardrobe') container.innerHTML = renderWardrobeView();
+      else if (state.activeTab === 'stylist') { container.innerHTML = renderStylistView(); scrollChatToBottom(); }
+      else if (state.activeTab === 'studio') {
+        container.innerHTML = renderStudioView();
+        if (state.studioMode === 'collage') bindCollageDragEvents();
+      }
+      else if (state.activeTab === 'gaps') container.innerHTML = renderGapsWishlistView();
+      else if (state.activeTab === 'pack') container.innerHTML = renderPackView();
+      else if (state.activeTab === 'calendar') container.innerHTML = renderCalendarInsightsView();
+    }
+
+    // =========================================================================
+    // 7. VIEW 1: WARDROBE
+    // =========================================================================
+    function getColorFamily(hex) {
+      const { s, l, h } = hexToHSL(hex);
+      if (s < 16) return l < 25 ? 'Black/Charcoal' : l > 78 ? 'White/Ivory' : 'Grey/Stone';
+      if (h >= 20 && h <= 55) return 'Earth/Camel';
+      if (h >= 190 && h <= 255) return 'Blue/Indigo';
+      return 'Accent';
+    }
+
+    function renderWardrobeView() {
+      const categories = ['All', 'Outerwear', 'Tops', 'Bottoms', 'Footwear', 'Accessories'];
+      const colorFamilies = ['All', 'Black/Charcoal', 'White/Ivory', 'Earth/Camel', 'Blue/Indigo', 'Grey/Stone', 'Accent'];
+
+      const filtered = state.wardrobe.filter(item => {
+        const matchCat = state.wardrobeFilter === 'All' || item.category === state.wardrobeFilter;
+        const matchSeason = state.wardrobeSeason === 'All' || item.season === state.wardrobeSeason;
+        const matchColor = state.wardrobeColorFilter === 'All' || getColorFamily(item.colorHex) === state.wardrobeColorFilter;
+        const q = state.wardrobeSearch.trim().toLowerCase();
+        const matchSearch = !q ||
+          item.name.toLowerCase().includes(q) ||
+          (item.brand || '').toLowerCase().includes(q) ||
+          (item.colorName || '').toLowerCase().includes(q) ||
+          (item.tags || []).some(t => t.toLowerCase().includes(q));
+        return matchCat && matchSeason && matchColor && matchSearch;
+      });
+
+      const totalVal = state.wardrobe.reduce((s, i) => s + (Number(i.price) || 0), 0);
+
+      return `
+        <div class="space-y-6 animate-fade-up">
+          ${renderWeatherBar()}
+
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div>
+              <p class="text-[11px] uppercase tracking-[0.25em] text-champagne font-semibold mb-1">Curated Archive</p>
+              <h2 class="font-serif text-3xl sm:text-4xl font-medium">Digital Wardrobe</h2>
+              <p class="text-sm text-neutral-500 dark:text-neutral-400 mt-1">${state.wardrobe.length} garments · $${totalVal.toLocaleString()} valuation</p>
+            </div>
+            <button onclick="openAddItemModal()" class="px-5 py-3 rounded-2xl bg-obsidian text-alabaster dark:bg-champagne dark:text-obsidian text-sm font-semibold shadow-editorial hover:opacity-90 transition flex items-center justify-center gap-2">
+              <span>+ Add Piece</span>
+              <span class="text-[10px] uppercase tracking-wider px-2 py-0.5 rounded-full bg-white/15 dark:bg-black/15">Cutout + AI</span>
+            </button>
+          </div>
+
+          <!-- Filters -->
+          <div class="space-y-3">
+            <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pb-1">
+              ${categories.map(cat => {
+                const active = state.wardrobeFilter === cat;
+                const count = cat === 'All' ? state.wardrobe.length : state.wardrobe.filter(i => i.category === cat).length;
+                return `
+                  <button onclick="state.wardrobeFilter='${cat}'; renderActiveView()" class="shrink-0 px-3.5 py-2 rounded-full text-xs font-medium border transition ${
+                    active ? 'bg-obsidian text-alabaster border-obsidian dark:bg-champagne dark:text-obsidian dark:border-champagne'
+                           : 'bg-white/80 dark:bg-white/5 border-taupe dark:border-white/10 text-neutral-600 dark:text-neutral-300 hover:border-champagne'
+                  }">${cat} <span class="opacity-60 ml-1">${count}</span></button>`;
+              }).join('')}
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2">
+              <div class="relative flex-1 min-w-[180px]">
+                <input type="text" value="${escapeHtml(state.wardrobeSearch)}" oninput="state.wardrobeSearch=this.value; renderActiveView()" placeholder="Search garment, brand, color..." class="w-full pl-9 pr-3 py-2 rounded-xl bg-white dark:bg-white/5 border border-taupe dark:border-white/10 focus:outline-none focus:border-champagne text-xs" />
+                <span class="absolute left-3 top-2 text-neutral-400 text-xs">⌕</span>
+              </div>
+              <select onchange="state.wardrobeSeason=this.value; renderActiveView()" class="px-3 py-2 rounded-xl bg-white dark:bg-obsidianCard border border-taupe dark:border-white/10 text-xs">
+                <option value="All" ${state.wardrobeSeason === 'All' ? 'selected' : ''}>All Seasons</option>
+                <option value="All-Season" ${state.wardrobeSeason === 'All-Season' ? 'selected' : ''}>All-Season</option>
+                <option value="Spring/Summer" ${state.wardrobeSeason === 'Spring/Summer' ? 'selected' : ''}>Spring/Summer</option>
+                <option value="Fall/Winter" ${state.wardrobeSeason === 'Fall/Winter' ? 'selected' : ''}>Fall/Winter</option>
+              </select>
+              <select onchange="state.wardrobeColorFilter=this.value; renderActiveView()" class="px-3 py-2 rounded-xl bg-white dark:bg-obsidianCard border border-taupe dark:border-white/10 text-xs">
+                ${colorFamilies.map(cf => `<option value="${cf}" ${state.wardrobeColorFilter === cf ? 'selected' : ''}>Color: ${cf}</option>`).join('')}
+              </select>
+            </div>
+          </div>
+
+          ${filtered.length === 0 ? `
+            <div class="p-12 text-center rounded-3xl border border-dashed border-taupe dark:border-white/15 bg-white/50 dark:bg-white/5">
+              <p class="font-serif text-xl mb-1">No garments match your filter</p>
+              <p class="text-xs text-neutral-500">Reset filters or add a new piece.</p>
+            </div>
+          ` : `
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+              ${filtered.map(item => `
+                <article onclick="openGarmentDrawer('${item.id}')" class="cursor-pointer group rounded-3xl bg-white dark:bg-obsidianCard border border-taupe/90 dark:border-white/10 overflow-hidden shadow-editorial hover:shadow-editorialHover hover:border-champagne/60 transition-all duration-300 flex flex-col">
+                  <div class="relative h-52 bg-ivory/80 dark:bg-white/[0.03] p-5 flex items-center justify-center overflow-hidden">
+                    ${renderItemThumbnail(item, 'w-40 h-40 transition-transform duration-500 group-hover:scale-105')}
+                    <span class="absolute top-3.5 left-3.5 px-2.5 py-1 rounded-full text-[10px] uppercase tracking-widest font-medium bg-white/90 dark:bg-obsidian/80 border border-taupe dark:border-white/10">${escapeHtml(item.category)}</span>
+                    <div class="absolute bottom-3 left-3.5 flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white/85 dark:bg-obsidian/80 text-[11px] border border-taupe/70 dark:border-white/10">
+                      <span class="w-2.5 h-2.5 rounded-full border border-black/15" style="background:${item.colorHex}"></span>
+                      <span class="truncate max-w-[110px]">${escapeHtml(item.colorName)}</span>
+                    </div>
+                  </div>
+                  <div class="p-4 flex-1 flex flex-col justify-between space-y-3">
+                    <div>
+                      <div class="flex items-center justify-between text-[10px] uppercase tracking-widest text-neutral-400">
+                        <span>${escapeHtml(item.brand || 'Archive')}</span>
+                        <span>${escapeHtml(item.season)}</span>
+                      </div>
+                      <h3 class="font-serif text-base font-medium mt-1 leading-snug line-clamp-1">${escapeHtml(item.name)}</h3>
+                    </div>
+                    <div class="pt-3 border-t border-taupe/70 dark:border-white/10 flex items-center justify-between gap-2">
+                      <div>
+                        <div class="text-xs font-semibold">${computeCPW(item)}</div>
+                        <div class="text-[11px] text-neutral-400">$${item.price} · ${item.wears} wears</div>
+                      </div>
+                      <button onclick="event.stopPropagation(); logItemWear('${item.id}')" class="px-3 py-1.5 rounded-xl bg-ivory dark:bg-white/10 hover:bg-champagne hover:text-obsidian text-xs font-medium transition">+1 Wear</button>
+                    </div>
+                  </div>
+                </article>`).join('')}
+            </div>
+          `}
+        </div>`;
+    }
+
+    function logItemWear(id) {
+      const item = getItemById(id);
+      if (!item) return;
+      item.wears = (Number(item.wears) || 0) + 1;
+      persistState();
+      renderActiveView();
+      showToast(`Logged wear for ${item.name} (${computeCPW(item)})`, 'gold');
+    }
+
+    function openGarmentDrawer(id) {
+      const item = getItemById(id);
+      if (!item) return;
+      document.getElementById('garment-drawer-panel').innerHTML = `
+        <div class="flex items-center justify-between pb-3 border-b border-taupe dark:border-white/10">
+          <div>
+            <p class="text-[10px] uppercase tracking-[0.22em] text-champagne font-semibold">${escapeHtml(item.brand || 'Archive')}</p>
+            <h3 class="font-serif text-xl font-medium">${escapeHtml(item.name)}</h3>
+          </div>
+          <button onclick="closeGarmentDrawer()" class="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10">✕</button>
+        </div>
+        <div class="h-52 rounded-3xl bg-ivory dark:bg-white/5 border border-taupe dark:border-white/10 flex items-center justify-center p-4">
+          ${renderItemThumbnail(item, 'w-40 h-40')}
+        </div>
+        <div class="grid grid-cols-3 gap-2.5 text-center">
+          <div class="p-3 rounded-2xl bg-white dark:bg-white/5 border border-taupe dark:border-white/10"><div class="text-[10px] uppercase text-neutral-400">Price</div><div class="font-serif text-lg">$${item.price}</div></div>
+          <div class="p-3 rounded-2xl bg-white dark:bg-white/5 border border-taupe dark:border-white/10"><div class="text-[10px] uppercase text-neutral-400">Wears</div><div class="font-serif text-lg">${item.wears}</div></div>
+          <div class="p-3 rounded-2xl bg-white dark:bg-white/5 border border-taupe dark:border-white/10"><div class="text-[10px] uppercase text-neutral-400">CPW</div><div class="font-serif text-sm font-semibold text-champagne mt-1">${computeCPW(item)}</div></div>
+        </div>
+        <div class="flex gap-2">
+          <button onclick="logItemWear('${item.id}'); openGarmentDrawer('${item.id}')" class="flex-1 py-2.5 rounded-xl bg-obsidian text-alabaster dark:bg-champagne dark:text-obsidian text-xs font-semibold">+1 Wear</button>
+          <button onclick="sendGarmentToStudio('${item.id}'); closeGarmentDrawer()" class="flex-1 py-2.5 rounded-xl border border-champagne text-champagneDark dark:text-champagneLight text-xs font-semibold hover:bg-champagne hover:text-obsidian transition">❖ Send to Studio</button>
+        </div>
+        <form onsubmit="saveGarmentEdits(event, '${item.id}')" class="space-y-3 pt-3 border-t border-taupe dark:border-white/10">
+          <div class="text-[11px] uppercase tracking-widest text-neutral-400 font-semibold">Edit Garment</div>
+          <input type="text" id="edit-name" value="${escapeHtml(item.name)}" required class="w-full px-3.5 py-2 rounded-xl bg-white dark:bg-white/5 border border-taupe dark:border-white/15 text-xs" />
+          <div class="grid grid-cols-2 gap-2.5">
+            <input type="text" id="edit-brand" value="${escapeHtml(item.brand || '')}" placeholder="Brand" class="px-3.5 py-2 rounded-xl bg-white dark:bg-white/5 border border-taupe dark:border-white/15 text-xs" />
+            <input type="number" id="edit-price" value="${item.price}" min="0" class="px-3.5 py-2 rounded-xl bg-white dark:bg-white/5 border border-taupe dark:border-white/15 text-xs" />
+          </div>
+          <div class="grid grid-cols-2 gap-2.5">
+            <select id="edit-season" class="px-2.5 py-2 rounded-xl bg-white dark:bg-obsidianBg border border-taupe dark:border-white/15 text-xs">
+              ${['All-Season', 'Spring/Summer', 'Fall/Winter'].map(s => `<option value="${s}" ${item.season === s ? 'selected' : ''}>${s}</option>`).join('')}
+            </select>
+            <select id="edit-formality" class="px-2.5 py-2 rounded-xl bg-white dark:bg-obsidianBg border border-taupe dark:border-white/15 text-xs">
+              ${['Smart Casual', 'Casual', 'Formal', 'Evening'].map(f => `<option value="${f}" ${item.formality === f ? 'selected' : ''}>${f}</option>`).join('')}
+            </select>
+          </div>
+          <input type="text" id="edit-tags" value="${escapeHtml((item.tags || []).join(', '))}" placeholder="Tags (comma-separated)" class="w-full px-3.5 py-2 rounded-xl bg-white dark:bg-white/5 border border-taupe dark:border-white/15 text-xs" />
+          <div class="flex items-center justify-between pt-2">
+            <button type="button" onclick="deleteWardrobeItem('${item.id}'); closeGarmentDrawer()" class="px-3 py-2 rounded-xl text-xs text-red-500 hover:bg-red-500/10">Delete</button>
+            <button type="submit" class="px-5 py-2 rounded-xl bg-obsidian text-alabaster dark:bg-champagne dark:text-obsidian text-xs font-semibold">Save Changes</button>
+          </div>
+        </form>`;
+      document.getElementById('garment-drawer').classList.remove('hidden');
+      document.getElementById('garment-drawer').classList.add('flex');
+    }
+    function closeGarmentDrawer() { document.getElementById('garment-drawer').classList.add('hidden'); document.getElementById('garment-drawer').classList.remove('flex'); }
+
+    function sendGarmentToStudio(id) {
+      const item = getItemById(id);
+      if (!item) return;
+      state.studioSlots[item.category] = item.id;
+      state.studioLocks[item.category] = true;
+      state.studioTitle = `Styled Around ${item.name}`;
+      syncCollageFromSlots();
+      state.tryOnResultImage = null;
+      persistState();
+      switchTab('studio');
+      showToast(`Locked "${item.name}" in Studio`, 'gold');
+    }
+
+    function saveGarmentEdits(e, id) {
+      e.preventDefault();
+      const item = getItemById(id);
+      if (!item) return;
+      item.name = document.getElementById('edit-name').value.trim();
+      item.brand = document.getElementById('edit-brand').value.trim() || 'Archive';
+      item.price = Number(document.getElementById('edit-price').value) || 0;
+      item.season = document.getElementById('edit-season').value;
+      item.formality = document.getElementById('edit-formality').value;
+      item.tags = document.getElementById('edit-tags').value.split(',').map(s => s.trim().toLowerCase()).filter(Boolean);
+      persistState(); renderActiveView(); closeGarmentDrawer();
+      showToast(`Updated "${item.name}"`, 'gold');
+    }
+
+    function deleteWardrobeItem(id) {
+      const item = getItemById(id);
+      if (!item) return;
+      state.wardrobe = state.wardrobe.filter(i => i.id !== id);
+      STUDIO_CATEGORIES.forEach(k => { if (state.studioSlots[k] === id) state.studioSlots[k] = null; });
+      state.collageItems = state.collageItems.filter(c => c.itemId !== id);
+      persistState(); renderActiveView();
+      showToast(`Removed ${item.name}`);
+    }
+
+    // Add Item Modal: Photo Upload + Canvas Studio Cutout + AI Flat-Lay + Vision
+    function openAddItemModal() { document.getElementById('add-item-modal').classList.remove('hidden'); document.getElementById('add-item-modal').classList.add('flex'); }
+    function closeAddItemModal() {
+      document.getElementById('add-item-modal').classList.add('hidden');
+      document.getElementById('add-item-modal').classList.remove('flex');
+      document.getElementById('add-item-form').reset();
+      clearUploadedPhoto();
+    }
+
+    function handlePhotoUpload(e) {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => {
+        const img = new Image();
+        img.onload = () => {
+          const maxDim = 540;
+          let w = img.width, h = img.height;
+          if (w > maxDim || h > maxDim) {
+            const r = Math.min(maxDim / w, maxDim / h);
+            w = Math.round(w * r); h = Math.round(h * r);
+          }
+          const c = document.createElement('canvas');
+          c.width = w; c.height = h;
+          c.getContext('2d').drawImage(img, 0, 0, w, h);
+          originalUploadDataUrl = c.toDataURL('image/png');
+          currentUploadDataUrl = originalUploadDataUrl;
+          updateUploadPreviewUI(currentUploadDataUrl);
+        };
+        img.src = reader.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function updateUploadPreviewUI(dataUrl) {
+      const img = document.getElementById('upload-preview-img');
+      img.src = dataUrl; img.classList.remove('hidden');
+      document.getElementById('upload-placeholder').classList.add('hidden');
+      ['ai-scan-btn', 'apply-cutout-btn', 'restore-photo-btn', 'ai-flatlay-btn'].forEach(id => { const el = document.getElementById(id); if (el) el.disabled = false; });
+      document.getElementById('clear-photo-btn').classList.remove('hidden');
+    }
+    function restoreOriginalUpload() { if (!originalUploadDataUrl) return; currentUploadDataUrl = originalUploadDataUrl; updateUploadPreviewUI(originalUploadDataUrl); showToast('Restored original photo'); }
+    function clearUploadedPhoto() {
+      originalUploadDataUrl = null; currentUploadDataUrl = null;
+      const img = document.getElementById('upload-preview-img'); if (img) { img.src = ''; img.classList.add('hidden'); }
+      const ph = document.getElementById('upload-placeholder'); if (ph) ph.classList.remove('hidden');
+      ['ai-scan-btn', 'apply-cutout-btn', 'restore-photo-btn', 'ai-flatlay-btn'].forEach(id => { const el = document.getElementById(id); if (el) el.disabled = true; });
+      const clr = document.getElementById('clear-photo-btn'); if (clr) clr.classList.add('hidden');
+      const inp = document.getElementById('item-photo-input'); if (inp) inp.value = '';
+    }
+
+    function applyStudioCutout() {
+      if (!originalUploadDataUrl) return;
+      const sens = Number(document.getElementById('cutout-sensitivity').value) || 34;
+      const img = new Image();
+      img.onload = () => {
+        const w = img.width, h = img.height;
+        const canvas = document.createElement('canvas');
+        canvas.width = w; canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        ctx.drawImage(img, 0, 0);
+        const imgData = ctx.getImageData(0, 0, w, h);
+        const data = imgData.data;
+
+        const corners = [[2, 2], [w - 3, 2], [2, h - 3], [w - 3, h - 3]];
+        let bgR = 0, bgG = 0, bgB = 0;
+        corners.forEach(([x, y]) => { const idx = (y * w + x) * 4; bgR += data[idx]; bgG += data[idx + 1]; bgB += data[idx + 2]; });
+        bgR /= 4; bgG /= 4; bgB /= 4;
+
+        const visited = new Uint8Array(w * h);
+        const queue = [];
+        const threshold = sens * 2.1;
+        for (let x = 0; x < w; x++) queue.push(x, (h - 1) * w + x);
+        for (let y = 0; y < h; y++) queue.push(y * w, y * w + (w - 1));
+
+        let head = 0;
+        while (head < queue.length) {
+          const pos = queue[head++];
+          if (visited[pos]) continue;
+          visited[pos] = 1;
+          const idx = pos * 4;
+          const dist = Math.sqrt((data[idx] - bgR) ** 2 + (data[idx + 1] - bgG) ** 2 + (data[idx + 2] - bgB) ** 2);
+          if (dist <= threshold) {
+            data[idx + 3] = dist > threshold * 0.78 ? Math.round(((dist - threshold * 0.78) / (threshold * 0.22)) * 200) : 0;
+            const x = pos % w, y = (pos - x) / w;
+            if (x > 0 && !visited[pos - 1]) queue.push(pos - 1);
+            if (x < w - 1 && !visited[pos + 1]) queue.push(pos + 1);
+            if (y > 0 && !visited[pos - w]) queue.push(pos - w);
+            if (y < h - 1 && !visited[pos + w]) queue.push(pos + w);
+          }
+        }
+        ctx.putImageData(imgData, 0, 0);
+        currentUploadDataUrl = canvas.toDataURL('image/png');
+        updateUploadPreviewUI(currentUploadDataUrl);
+        showToast('Applied Studio Cutout!', 'gold');
+      };
+      img.src = originalUploadDataUrl;
+    }
+
+    async function enhanceToStudioFlatLay() {
+      if (!currentUploadDataUrl) return;
+      const btn = document.getElementById('ai-flatlay-btn');
+      const orig = btn.textContent;
+      btn.disabled = true; btn.textContent = '✦ Enhancing...';
+      try {
+        const data = await fetchWithRetry(GEMINI_IMAGE_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{
+              role: 'user',
+              parts: [
+                { text: 'Isolate this exact garment and render it as a crisp luxury e-commerce studio flat-lay on a clean warm alabaster (#FAF8F5) background. Soft studio lighting, remove hands, hangers, or background clutter.' },
+                { inlineData: { mimeType: 'image/png', data: currentUploadDataUrl.split(',')[1] } }
+              ]
+            }],
+            generationConfig: { responseModalities: ['IMAGE'] }
+          })
+        });
+        const imgPart = data?.candidates?.[0]?.content?.parts?.find(p => p.inlineData);
+        if (imgPart?.inlineData?.data) {
+          currentUploadDataUrl = `data:${imgPart.inlineData.mimeType || 'image/png'};base64,${imgPart.inlineData.data}`;
+          updateUploadPreviewUI(currentUploadDataUrl);
+          showToast('AI Studio Flat-Lay generated!', 'gold');
+        }
+      } catch (_) {
+        showToast('AI Flat-Lay busy — use Studio Cutout slider', 'warning');
+      } finally { btn.disabled = false; btn.textContent = orig; }
+    }
+
+    async function scanUploadedGarment() {
+      if (!currentUploadDataUrl) return;
+      const btn = document.getElementById('ai-scan-btn');
+      const orig = btn.textContent;
+      btn.disabled = true; btn.textContent = '✦ Scanning...';
+      try {
+        const data = await fetchWithRetry(GEMINI_TEXT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{
+              role: 'user',
+              parts: [
+                { text: "Analyze this garment as a luxury archivist. Return JSON with name, brand, category (Tops, Bottoms, Outerwear, Footwear, or Accessories), fabric, colorName, colorHex, season (All-Season, Spring/Summer, or Fall/Winter), formality (Casual, Smart Casual, Formal, Evening), price in USD, and 3 tags." },
+                { inlineData: { mimeType: 'image/png', data: currentUploadDataUrl.split(',')[1] } }
+              ]
+            }],
+            generationConfig: {
+              responseMimeType: 'application/json',
+              responseSchema: {
+                type: 'OBJECT',
+                properties: {
+                  name: { type: 'STRING' }, brand: { type: 'STRING' }, category: { type: 'STRING' },
+                  fabric: { type: 'STRING' }, colorName: { type: 'STRING' }, colorHex: { type: 'STRING' },
+                  season: { type: 'STRING' }, formality: { type: 'STRING' }, price: { type: 'NUMBER' },
+                  tags: { type: 'ARRAY', items: { type: 'STRING' } }
+                },
+                required: ['name', 'category', 'colorName', 'colorHex', 'price']
+              }
+            }
+          })
+        });
+        const p = JSON.parse(data?.candidates?.[0]?.content?.parts?.[0]?.text || '{}');
+        document.getElementById('input-name').value = p.name || '';
+        document.getElementById('input-brand').value = p.brand || 'Archive';
+        document.getElementById('input-fabric').value = p.fabric || 'Cotton';
+        if (STUDIO_CATEGORIES.includes(p.category)) document.getElementById('input-category').value = p.category;
+        if (['All-Season', 'Spring/Summer', 'Fall/Winter'].includes(p.season)) document.getElementById('input-season').value = p.season;
+        if (['Casual', 'Smart Casual', 'Formal', 'Evening'].includes(p.formality)) document.getElementById('input-formality').value = p.formality;
+        document.getElementById('input-color-name').value = p.colorName || 'Charcoal';
+        if (/^#[0-9A-Fa-f]{6}$/.test(p.colorHex)) document.getElementById('input-color-hex').value = p.colorHex;
+        document.getElementById('input-price').value = Math.round(p.price || 180);
+        document.getElementById('input-tags').value = (p.tags || []).join(', ');
+        showToast('Gemini Vision auto-tagged your piece!', 'gold');
+      } catch (_) {
+        showToast('Vision scan unavailable — fill details manually', 'warning');
+      } finally { btn.disabled = false; btn.textContent = orig; }
+    }
+
+    function handleAddItemSubmit(e) {
+      e.preventDefault();
+      const newItem = {
+        id: 'item-' + Date.now(),
+        name: document.getElementById('input-name').value.trim(),
+        brand: document.getElementById('input-brand').value.trim() || 'Archive',
+        category: document.getElementById('input-category').value,
+        fabric: document.getElementById('input-fabric').value.trim() || 'Cotton',
+        season: document.getElementById('input-season').value,
+        formality: document.getElementById('input-formality').value,
+        colorHex: document.getElementById('input-color-hex').value,
+        colorName: document.getElementById('input-color-name').value.trim() || 'Neutral',
+        price: Number(document.getElementById('input-price').value) || 0,
+        wears: 0,
+        tags: document.getElementById('input-tags').value.split(',').map(s => s.trim().toLowerCase()).filter(Boolean),
+        image: currentUploadDataUrl || null,
+        createdAt: Date.now()
+      };
+      state.wardrobe.unshift(newItem);
+      persistState(); closeAddItemModal(); renderActiveView();
+      showToast(`Archived "${newItem.name}"`, 'gold');
+    }
+
+    // =========================================================================
+    // 8. VIEW 2: AI STYLIST CHAT
+    // =========================================================================
+    const QUICK_PROMPTS = [
+      "Style for Today's Weather",
+      "Date Night",
+      "Smart Casual",
+      "Roast & Rate My Closet",
+      "Color Palette Audit"
+    ];
+
+    function renderStylistView() {
+      return `
+        <div class="space-y-5 animate-fade-up">
+          ${renderWeatherBar()}
+
+          <div class="flex flex-col h-[calc(100vh-300px)] lg:h-[calc(100vh-225px)] min-h-[450px] rounded-3xl bg-white/85 dark:bg-obsidianCard/85 border border-taupe dark:border-white/10 p-4 sm:p-6 shadow-editorial">
+            <div class="flex items-center justify-between pb-3 border-b border-taupe/70 dark:border-white/10">
+              <div>
+                <p class="text-[10px] uppercase tracking-[0.22em] text-champagne font-semibold">Wardrobe & Climate Aware</p>
+                <h2 class="font-serif text-2xl font-medium">AI Personal Stylist</h2>
+              </div>
+              <span class="text-xs text-neutral-400">${state.wardrobe.length} pieces synced</span>
+            </div>
+
+            <div id="chat-messages" class="flex-1 overflow-y-auto py-4 space-y-5 pr-1">
+              ${state.chatMessages.map((msg, idx) => renderChatBubble(msg, idx)).join('')}
+            </div>
+
+            <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-2">
+              ${QUICK_PROMPTS.map(prompt => `
+                <button onclick="sendStylistPrompt(${JSON.stringify(prompt).replace(/"/g, '&quot;')})" class="shrink-0 px-3.5 py-1.5 rounded-full text-xs font-medium bg-alabaster dark:bg-white/5 border border-taupe dark:border-white/10 hover:border-champagne hover:text-champagne transition">
+                  ${prompt.includes('Roast') ? '🔥 ' : '✦ '}${prompt}
+                </button>
+              `).join('')}
+            </div>
+
+            <form onsubmit="handleChatSubmit(event)" class="pt-2 flex items-center gap-2">
+              <input type="text" id="stylist-chat-input" placeholder="Ask for an outfit, palette audit, or roast..." class="flex-1 px-4 py-3 rounded-2xl bg-white dark:bg-obsidianBg border border-taupe dark:border-white/15 focus:outline-none focus:border-champagne text-sm" />
+              <button type="submit" class="px-5 py-3 rounded-2xl bg-obsidian text-alabaster dark:bg-champagne dark:text-obsidian text-sm font-semibold shrink-0">Style Me</button>
+            </form>
+          </div>
+        </div>`;
+    }
+
+    function renderChatBubble(msg, idx) {
+      if (msg.role === 'user') {
+        return `<div class="flex justify-end"><div class="max-w-[82%] sm:max-w-lg px-4 py-3 rounded-2xl rounded-tr-sm bg-obsidian text-alabaster dark:bg-champagne dark:text-obsidian text-sm shadow-editorial">${escapeHtml(msg.text)}</div></div>`;
+      }
+      const outfit = msg.outfit;
+      const validItems = outfit && Array.isArray(outfit.itemIds) ? outfit.itemIds.map(getAnyItemById).filter(Boolean) : [];
+      return `
+        <div class="flex justify-start">
+          <div class="max-w-[94%] sm:max-w-2xl space-y-3">
+            <div class="text-[10px] uppercase tracking-widest text-champagne font-semibold">✦ ATELIER STYLIST</div>
+            <div class="px-5 py-4 rounded-3xl rounded-tl-sm bg-white dark:bg-obsidianBg border border-taupe dark:border-white/10 text-sm leading-relaxed whitespace-pre-line">${escapeHtml(msg.text)}</div>
+            ${validItems.length ? `
+              <div class="p-5 rounded-3xl bg-alabaster dark:bg-obsidianBg border border-champagne/40 shadow-editorial space-y-4">
+                <div class="flex flex-wrap items-center justify-between gap-2">
+                  <div>
+                    <div class="text-[10px] uppercase tracking-[0.2em] text-champagne font-semibold">Curated Outfit</div>
+                    <h4 class="font-serif text-lg font-medium">${escapeHtml(outfit.title || 'Editorial Pairing')}</h4>
+                  </div>
+                  <span class="px-3 py-1 rounded-full bg-champagne/15 border border-champagne/40 text-xs font-semibold text-champagneDark dark:text-champagneLight">Style Harmony · ${outfit.harmonyScore || 94}/100</span>
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+                  ${validItems.map(item => `
+                    <div class="p-2.5 rounded-2xl bg-white dark:bg-white/5 border border-taupe/70 dark:border-white/10 text-center">
+                      <div class="h-14 flex items-center justify-center mb-1">${renderItemThumbnail(item, 'w-12 h-12')}</div>
+                      <div class="text-[11px] font-medium line-clamp-1">${escapeHtml(item.name)}</div>
+                      <div class="text-[10px] text-neutral-400">${escapeHtml(item.category)}</div>
+                    </div>`).join('')}
+                </div>
+                ${outfit.rationale ? `<p class="text-xs text-neutral-500 dark:text-neutral-400 italic border-l-2 border-champagne pl-3">"${escapeHtml(outfit.rationale)}"</p>` : ''}
+                <div class="flex flex-wrap gap-2">
+                  <button onclick="openChatOutfitInStudio(${idx})" class="px-4 py-2 rounded-xl bg-obsidian text-alabaster dark:bg-champagne dark:text-obsidian text-xs font-semibold">❖ Open in Studio</button>
+                  <button onclick="saveChatOutfitLook(${idx})" class="px-4 py-2 rounded-xl border border-taupe dark:border-white/15 text-xs font-medium hover:border-champagne">♡ Save Look</button>
+                </div>
+              </div>` : ''}
+          </div>
+        </div>`;
+    }
+
+    function scrollChatToBottom() { setTimeout(() => { const el = document.getElementById('chat-messages'); if (el) el.scrollTop = el.scrollHeight; }, 40); }
+    function handleChatSubmit(e) { e.preventDefault(); const inp = document.getElementById('stylist-chat-input'); const t = inp.value.trim(); if (!t) return; inp.value = ''; sendStylistPrompt(t); }
+
+    async function sendStylistPrompt(userPrompt) {
+      state.chatMessages.push({ role: 'user', text: userPrompt });
+      renderActiveView();
+      const chatBox = document.getElementById('chat-messages');
+      if (chatBox) {
+        const div = document.createElement('div');
+        div.className = 'flex justify-start animate-fade-up';
+        div.innerHTML = `<div class="px-4 py-3 rounded-2xl bg-white dark:bg-obsidianBg border border-taupe dark:border-white/10 text-xs text-neutral-500 flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-champagne animate-ping"></span><span>Reviewing your closet & ${formatTemp(state.weather.tempC)} ${state.weather.conditionLabel} climate...</span></div>`;
+        chatBox.appendChild(div);
+        scrollChatToBottom();
+      }
+
+      try {
+        const w = state.weather;
+        const sys = `You are ATELIER AI, a luxury editorial personal stylist.
+Active Weather: ${formatTemp(w.tempC)}, ${w.conditionLabel} (${w.isManual ? 'Manual Override' : w.city}).
+User Wardrobe: ${JSON.stringify(state.wardrobe.map(i => ({ id: i.id, name: i.name, brand: i.brand, category: i.category, fabric: i.fabric, color: i.colorName, wears: i.wears })))}.
+Respond in JSON. When suggesting an outfit, ALWAYS use exact item IDs from the user's wardrobe.`;
+
+        const data = await fetchWithRetry(GEMINI_TEXT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ role: 'user', parts: [{ text: userPrompt }] }],
+            systemInstruction: { parts: [{ text: sys }] },
+            generationConfig: {
+              responseMimeType: 'application/json',
+              responseSchema: {
+                type: 'OBJECT',
+                properties: {
+                  reply: { type: 'STRING' },
+                  outfit: {
+                    type: 'OBJECT', nullable: true,
+                    properties: { title: { type: 'STRING' }, harmonyScore: { type: 'NUMBER' }, rationale: { type: 'STRING' }, itemIds: { type: 'ARRAY', items: { type: 'STRING' } } }
+                  }
+                },
+                required: ['reply']
+              }
+            }
+          })
+        });
+        const parsed = JSON.parse(data?.candidates?.[0]?.content?.parts?.[0]?.text || '{}');
+        state.chatMessages.push({ role: 'assistant', text: parsed.reply || 'Here is my tailored edit.', outfit: parsed.outfit?.itemIds?.length ? parsed.outfit : null });
+      } catch (_) {
+        const w = state.weather;
+        const isRain = w.conditionId === 'rainy';
+        const isCold = w.tempC <= 10 || w.conditionId === 'snowy';
+        const isHot = w.tempC >= 25 || w.conditionId === 'humid';
+        const ids = [
+          isHot && !isRain ? null : (isRain ? 'item-3' : isCold ? 'item-1' : 'item-2'),
+          isCold ? 'item-4' : isHot ? 'item-6' : 'item-5',
+          isHot ? 'item-9' : 'item-7',
+          (isRain || isCold) ? 'item-10' : 'item-11'
+        ].filter(id => id && getItemById(id));
+
+        state.chatMessages.push({
+          role: 'assistant',
+          text: `Tailored for ${formatTemp(w.tempC)} and ${w.conditionLabel}: balanced proportions with weather-appropriate natural fibers from your archive.`,
+          outfit: { title: `${w.conditionLabel} Editorial Edit`, harmonyScore: 94, rationale: 'Matches active temperature and weather conditions cleanly.', itemIds: ids }
+        });
+      }
+      renderActiveView(); scrollChatToBottom();
+    }
+
+    function openChatOutfitInStudio(idx) {
+      const o = state.chatMessages[idx]?.outfit;
+      if (!o?.itemIds) return;
+      state.studioTitle = o.title || 'Stylist Selection';
+      state.studioSlots = { Outerwear: null, Tops: null, Bottoms: null, Footwear: null, Accessories: null };
+      o.itemIds.forEach(id => { const item = getAnyItemById(id); if (item && state.studioSlots.hasOwnProperty(item.category)) state.studioSlots[item.category] = item.id; });
+      syncCollageFromSlots(); state.tryOnResultImage = null; persistState(); switchTab('studio');
+    }
+
+    function saveChatOutfitLook(idx) {
+      const o = state.chatMessages[idx]?.outfit;
+      if (!o?.itemIds?.length) return;
+      const newLook = { id: 'look-' + Date.now(), title: o.title || 'AI Look', occasion: state.weather.conditionLabel, harmonyScore: o.harmonyScore || 94, itemIds: o.itemIds.filter(id => !!getAnyItemById(id)), createdAt: new Date().toISOString() };
+      state.savedLooks.unshift(newLook);
+      persistState();
+      showToast(`Saved "${newLook.title}" to Saved Looks!`, 'gold');
+    }
+
+    // =========================================================================
+    // 9. VIEW 3: OUTFIT STUDIO v2 (SLOTS + COLLAGE + TRY-ON + 1080x1350 PNG)
+    // =========================================================================
+    function hexToRGB(hex) {
+      const c = (hex || '#141414').replace('#', '');
+      return { r: parseInt(c.substring(0, 2), 16) || 0, g: parseInt(c.substring(2, 4), 16) || 0, b: parseInt(c.substring(4, 6), 16) || 0 };
+    }
+    function hexToHSL(hex) {
+      const { r: r255, g: g255, b: b255 } = hexToRGB(hex);
+      const r = r255 / 255, g = g255 / 255, b = b255 / 255;
+      const max = Math.max(r, g, b), min = Math.min(r, g, b);
+      let h = 0, s = 0, l = (max + min) / 2;
+      if (max !== min) {
+        const d = max - min;
+        s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+        if (max === r) h = ((g - b) / d + (g < b ? 6 : 0)) * 60;
+        else if (max === g) h = ((b - r) / d + 2) * 60;
+        else h = ((r - g) / d + 4) * 60;
+      }
+      return { h: Math.round(h), s: Math.round(s * 100), l: Math.round(l * 100) };
+    }
+
+    function calculateColorHarmony(items) {
+      if (!items.length) return { score: 0, scheme: 'Empty Canvas', note: 'Add garments to evaluate color harmony.' };
+      const hsls = items.map(i => hexToHSL(i.colorHex));
+      const chromatic = hsls.filter(c => c.s >= 18 && c.l >= 16 && c.l <= 88);
+      let scheme = 'Neutral-Balanced', score = 89, note = 'Refined neutral foundation with quiet-luxury balance.';
+      if (chromatic.length === 0) {
+        const spread = Math.max(...hsls.map(c => c.l)) - Math.min(...hsls.map(c => c.l));
+        scheme = 'Monochrome'; score = spread > 35 ? 96 : 92;
+        note = spread > 35 ? 'High-contrast architectural monochrome.' : 'Sleek tonal monochrome with editorial restraint.';
+      } else if (chromatic.length === 1) {
+        scheme = 'Neutral-Anchored Accent'; score = 95;
+        note = 'Single focal accent anchored by crisp editorial neutrals.';
+      } else {
+        const hues = chromatic.map(c => c.h);
+        let maxDiff = 0;
+        for (let i = 0; i < hues.length; i++) for (let j = i + 1; j < hues.length; j++) {
+          const d = Math.abs(hues[i] - hues[j]);
+          maxDiff = Math.max(maxDiff, Math.min(d, 360 - d));
+        }
+        if (maxDiff <= 45) { scheme = 'Analogous'; score = 94; note = 'Cohesive neighboring hues create a fluid palette.'; }
+        else if (maxDiff >= 135) { scheme = 'Complementary'; score = 92; note = 'Bold high-contrast runway pairing.'; }
+        else { scheme = 'Triadic Editorial'; score = 87; note = 'Expressive multi-tone mix—keep footwear clean.'; }
+      }
+      if (items.length >= 4) score = Math.min(99, score + 2);
+      return { score, scheme, note };
+    }
+
+    function syncCollageFromSlots() {
+      const pos = {
+        Outerwear: { x: 14, y: 10, scale: 1.15, rotate: -4, z: 3 },
+        Tops: { x: 52, y: 12, scale: 1.05, rotate: 3, z: 2 },
+        Bottoms: { x: 34, y: 45, scale: 1.12, rotate: -2, z: 2 },
+        Footwear: { x: 66, y: 65, scale: 0.92, rotate: 5, z: 4 },
+        Accessories: { x: 10, y: 58, scale: 0.88, rotate: -6, z: 4 }
+      };
+      state.collageItems = STUDIO_CATEGORIES
+        .filter(cat => state.studioSlots[cat] && getAnyItemById(state.studioSlots[cat]))
+        .map(cat => ({ id: 'col-' + cat, itemId: state.studioSlots[cat], ...pos[cat] }));
+      state.collageSelectedId = state.collageItems[0]?.id || null;
+    }
+
+    function getActiveStudioItems() {
+      if (state.studioMode === 'collage') return state.collageItems.map(c => getAnyItemById(c.itemId)).filter(Boolean);
+      return STUDIO_CATEGORIES.map(c => getAnyItemById(state.studioSlots[c])).filter(Boolean);
+    }
+
+    function renderStudioView() {
+      const selectedItems = getActiveStudioItems();
+      const harmony = calculateColorHarmony(selectedItems);
+      const selCol = state.collageItems.find(c => c.id === state.collageSelectedId);
+
+      return `
+        <div class="space-y-6 animate-fade-up">
+          ${renderWeatherBar()}
+
+          <div class="flex flex-col lg:flex-row lg:items-end justify-between gap-4">
+            <div>
+              <p class="text-[11px] uppercase tracking-[0.25em] text-champagne font-semibold mb-1">Mix, Collage & Visualize</p>
+              <h2 class="font-serif text-3xl sm:text-4xl font-medium">Outfit Studio</h2>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2">
+              <div class="inline-flex p-1 rounded-2xl bg-ivory dark:bg-white/5 border border-taupe dark:border-white/10">
+                <button onclick="setStudioMode('slots')" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold transition ${state.studioMode === 'slots' ? 'bg-obsidian text-alabaster dark:bg-champagne dark:text-obsidian shadow-sm' : 'text-neutral-500'}">Slot Mode</button>
+                <button onclick="setStudioMode('collage')" class="px-3.5 py-1.5 rounded-xl text-xs font-semibold transition ${state.studioMode === 'collage' ? 'bg-obsidian text-alabaster dark:bg-champagne dark:text-obsidian shadow-sm' : 'text-neutral-500'}">Freeform Collage</button>
+              </div>
+              <button onclick="shuffleStudio()" class="px-3 py-2 rounded-2xl bg-white dark:bg-white/5 border border-taupe dark:border-white/15 hover:border-champagne text-xs font-medium">↻ Shuffle</button>
+              <button id="ai-complete-btn" onclick="aiCompleteStudioLook()" class="px-3.5 py-2 rounded-2xl bg-champagne/15 border border-champagne text-champagneDark dark:text-champagneLight hover:bg-champagne hover:text-obsidian text-xs font-semibold">✦ AI Complete Look</button>
+              <button onclick="exportLookbookPNG()" class="px-3.5 py-2 rounded-2xl bg-white dark:bg-white/5 border border-taupe dark:border-white/15 hover:border-champagne text-xs font-semibold">↓ Export Lookbook Card</button>
+              <button onclick="openSaveLookModal()" class="px-4 py-2 rounded-2xl bg-obsidian text-alabaster dark:bg-champagne dark:text-obsidian text-xs font-semibold">♡ Save</button>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 xl:grid-cols-12 gap-6">
+            <!-- Left 7 Cols -->
+            <div class="xl:col-span-7 space-y-4">
+              ${state.studioMode === 'slots' ? `
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  ${STUDIO_CATEGORIES.map(cat => {
+                    const item = getAnyItemById(state.studioSlots[cat]);
+                    const locked = state.studioLocks[cat];
+                    return `
+                      <div class="p-4 rounded-3xl bg-white dark:bg-obsidianCard border ${locked ? 'border-champagne' : 'border-taupe dark:border-white/10'} shadow-editorial flex flex-col justify-between">
+                        <div class="flex items-center justify-between mb-2">
+                          <div class="flex items-center gap-2">
+                            <span class="text-[11px] uppercase tracking-widest text-neutral-400 font-semibold">${cat}</span>
+                            ${item?.isWishlist ? '<span class="px-2 py-0.5 rounded-full bg-champagne/20 text-champagne text-[9px] uppercase font-bold">Wishlist</span>' : ''}
+                          </div>
+                          <div class="flex items-center gap-1">
+                            <button onclick="toggleStudioLock('${cat}')" class="px-2 py-1 rounded-lg text-xs ${locked ? 'bg-champagne text-obsidian font-semibold' : 'bg-ivory dark:bg-white/5 text-neutral-400'}">${locked ? '🔒 Locked' : '🔓'}</button>
+                            ${item ? `<button onclick="clearStudioSlot('${cat}')" class="px-2 py-1 rounded-lg bg-ivory dark:bg-white/5 text-xs text-neutral-400 hover:text-red-500">✕</button>` : ''}
+                          </div>
+                        </div>
+                        <button onclick="openSlotPicker('${cat}')" class="w-full text-left group flex items-center gap-3.5 p-2 rounded-2xl hover:bg-ivory/70 dark:hover:bg-white/5 transition">
+                          <div class="w-20 h-20 rounded-2xl bg-ivory dark:bg-white/[0.04] flex items-center justify-center shrink-0 overflow-hidden">
+                            ${item ? renderItemThumbnail(item, 'w-16 h-16 group-hover:scale-105 transition') : '<span class="text-2xl text-neutral-300">+</span>'}
+                          </div>
+                          <div class="min-w-0 flex-1">
+                            ${item ? `
+                              <div class="text-[10px] uppercase tracking-wider text-champagne">${escapeHtml(item.brand || 'Archive')}</div>
+                              <div class="font-serif text-sm font-medium truncate">${escapeHtml(item.name)}</div>
+                              <div class="flex items-center gap-1.5 mt-1 text-xs text-neutral-500">
+                                <span class="w-2.5 h-2.5 rounded-full border border-black/15" style="background:${item.colorHex}"></span>
+                                <span class="truncate">${escapeHtml(item.colorName)}</span>
+                              </div>
+                            ` : `<div class="text-sm font-medium text-neutral-400">Select ${cat}</div><div class="text-xs text-neutral-400">Closet or wishlist</div>`}
+                          </div>
+                        </button>
+                      </div>`;
+                  }).join('')}
+                  ${renderColorHarmonyCard(harmony, selectedItems)}
+                </div>
+              ` : `
+                <div class="p-4 rounded-3xl bg-white dark:bg-obsidianCard border border-taupe dark:border-white/10 shadow-editorial space-y-4">
+                  <div class="flex flex-wrap items-center justify-between gap-2">
+                    <div class="flex items-center gap-1.5">
+                      <span class="text-[10px] uppercase tracking-widest text-neutral-400 mr-1">Backdrop:</span>
+                      ${[{ id: 'alabaster', label: 'Alabaster' }, { id: 'linen', label: 'Linen' }, { id: 'slate', label: 'Slate' }, { id: 'grid', label: 'Grid' }].map(b => `
+                        <button onclick="state.collageBackdrop='${b.id}'; renderActiveView()" class="px-2.5 py-1 rounded-full text-[11px] font-medium border ${
+                          state.collageBackdrop === b.id ? 'bg-obsidian text-alabaster border-obsidian dark:bg-champagne dark:text-obsidian' : 'border-taupe dark:border-white/10 text-neutral-500'
+                        }">${b.label}</button>
+                      `).join('')}
+                    </div>
+                    <button onclick="syncCollageFromSlots(); renderActiveView()" class="text-xs text-champagne font-medium hover:underline">Reset Layout</button>
+                  </div>
+
+                  <div id="collage-canvas" class="relative w-full h-[400px] rounded-2xl border border-taupe dark:border-white/10 overflow-hidden backdrop-${state.collageBackdrop}">
+                    <div class="absolute top-3 left-4 text-[10px] uppercase tracking-[0.25em] ${state.collageBackdrop === 'slate' ? 'text-white/40' : 'text-obsidian/35'} pointer-events-none font-semibold">DRAG, SCALE & LAYER PIECES</div>
+                    ${state.collageItems.map(c => {
+                      const item = getAnyItemById(c.itemId);
+                      if (!item) return '';
+                      const isSel = state.collageSelectedId === c.id;
+                      return `
+                        <div data-collage-id="${c.id}"
+                          class="collage-item absolute w-32 h-32 flex items-center justify-center rounded-2xl ${isSel ? 'ring-2 ring-champagne bg-white/30 backdrop-blur-[2px] shadow-lg' : ''}"
+                          style="left:${c.x}%; top:${c.y}%; z-index:${c.z}; transform: scale(${c.scale}) rotate(${c.rotate}deg);">
+                          ${renderItemThumbnail(item, 'w-28 h-28 pointer-events-none')}
+                        </div>`;
+                    }).join('')}
+                  </div>
+
+                  ${selCol ? `
+                    <div class="p-3.5 rounded-2xl bg-ivory/80 dark:bg-white/5 border border-taupe/80 dark:border-white/10 flex flex-wrap items-center justify-between gap-3 text-xs">
+                      <div class="font-medium truncate max-w-[150px]">${escapeHtml(getAnyItemById(selCol.itemId)?.name || 'Selected')}</div>
+                      <div class="flex items-center gap-3 flex-wrap">
+                        <label class="flex items-center gap-1.5"><span class="text-neutral-400">Size</span><input type="range" min="0.6" max="1.7" step="0.05" value="${selCol.scale}" oninput="updateCollageTransform('scale', Number(this.value))" class="w-20 accent-champagne" /></label>
+                        <label class="flex items-center gap-1.5"><span class="text-neutral-400">Rotate</span><input type="range" min="-35" max="35" step="1" value="${selCol.rotate}" oninput="updateCollageTransform('rotate', Number(this.value))" class="w-20 accent-champagne" /></label>
+                        <button onclick="shiftCollageLayer(1)" class="px-2 py-1 rounded-lg border border-taupe dark:border-white/15">↑ Front</button>
+                        <button onclick="shiftCollageLayer(-1)" class="px-2 py-1 rounded-lg border border-taupe dark:border-white/15">↓ Back</button>
+                      </div>
+                    </div>
+                  ` : ''}
+                </div>
+                ${renderColorHarmonyCard(harmony, selectedItems)}
+              `}
+            </div>
+
+            <!-- Right 5 Cols: Gemini Virtual Try-On -->
+            <div class="xl:col-span-5">
+              <div class="p-5 rounded-3xl bg-white dark:bg-obsidianCard border border-taupe dark:border-white/10 shadow-editorial space-y-4">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <p class="text-[10px] uppercase tracking-[0.22em] text-champagne font-semibold">Gemini Visualization</p>
+                    <h3 class="font-serif text-xl font-medium">Virtual Try-On</h3>
+                  </div>
+                  <span class="px-2.5 py-1 rounded-full bg-champagne/15 text-champagneDark dark:text-champagneLight text-[10px] font-bold uppercase">Unlimited</span>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2.5">
+                  <select onchange="state.tryOnProfile=this.value" class="px-3 py-2 rounded-xl bg-ivory dark:bg-white/5 border border-taupe dark:border-white/10 text-xs">
+                    ${['Unisex', 'Womenswear', 'Menswear'].map(p => `<option value="${p}" ${state.tryOnProfile === p ? 'selected' : ''}>Model: ${p}</option>`).join('')}
+                  </select>
+                  <select onchange="state.tryOnSetting=this.value" class="px-3 py-2 rounded-xl bg-ivory dark:bg-white/5 border border-taupe dark:border-white/10 text-xs">
+                    ${['Studio Editorial', 'Street Style', 'Rooftop Dinner'].map(s => `<option value="${s}" ${state.tryOnSetting === s ? 'selected' : ''}>${s}</option>`).join('')}
+                  </select>
+                </div>
+
+                <div class="flex items-center justify-between gap-2 px-3.5 py-2 rounded-xl bg-ivory/70 dark:bg-white/5 border border-taupe/80 dark:border-white/10">
+                  <div class="text-xs truncate">
+                    ${state.tryOnUserPhoto ? '<span class="text-champagne font-medium">✓ Full-body photo loaded</span>' : '<span class="text-neutral-500">Optional: Upload your photo</span>'}
+                  </div>
+                  <div class="flex items-center gap-2 shrink-0">
+                    <label class="cursor-pointer px-2.5 py-1 rounded-lg bg-white dark:bg-white/10 border border-taupe dark:border-white/15 text-[11px] font-medium hover:border-champagne">
+                      ${state.tryOnUserPhoto ? 'Change' : 'Upload'}
+                      <input type="file" accept="image/*" onchange="handleTryOnUserPhoto(event)" class="hidden" />
+                    </label>
+                    ${state.tryOnUserPhoto ? `<button onclick="state.tryOnUserPhoto=null; renderActiveView()" class="text-xs text-neutral-400 hover:text-red-500">✕</button>` : ''}
+                  </div>
+                </div>
+
+                <div class="relative rounded-2xl overflow-hidden bg-ivory dark:bg-black/40 border border-taupe dark:border-white/10 min-h-[300px] flex items-center justify-center">
+                  ${state.tryOnLoading ? `
+                    <div class="absolute inset-0 shimmer-bg flex flex-col items-center justify-center p-6 text-center space-y-3">
+                      <div class="w-10 h-10 rounded-full border-2 border-champagne border-t-transparent animate-spin"></div>
+                      <p class="font-serif text-base">Rendering Editorial Shoot...</p>
+                    </div>
+                  ` : state.tryOnResultImage ? `
+                    <img src="${state.tryOnResultImage}" alt="AI Virtual Try-On" class="w-full h-[350px] object-cover" />
+                    <div class="absolute bottom-3 left-3 right-3 px-3.5 py-2 rounded-xl glass-panel border border-white/20 flex items-center justify-between text-[11px]">
+                      <span class="font-medium">${state.tryOnSetting} · ${harmony.scheme}</span>
+                      <span class="text-champagne font-semibold">${harmony.score}/100</span>
+                    </div>
+                  ` : state.tryOnFallbackMode ? `
+                    <div class="w-full p-5 space-y-4">
+                      <div class="flex items-center justify-between border-b border-taupe dark:border-white/10 pb-2">
+                        <span class="font-serif italic text-sm">EDITORIAL FLAT-LAY</span>
+                        <span class="text-[10px] uppercase tracking-widest text-champagne">${harmony.scheme}</span>
+                      </div>
+                      <div class="grid grid-cols-3 gap-2.5">
+                        ${selectedItems.map(i => `
+                          <div class="p-2 rounded-xl bg-white dark:bg-white/5 border border-taupe/60 dark:border-white/10 text-center">
+                            <div class="h-16 flex items-center justify-center">${renderItemThumbnail(i, 'w-14 h-14')}</div>
+                            <div class="text-[10px] font-medium truncate mt-1">${escapeHtml(i.name)}</div>
+                          </div>`).join('')}
+                      </div>
+                    </div>
+                  ` : `
+                    <div class="p-8 text-center space-y-2 max-w-xs">
+                      <div class="w-12 h-12 mx-auto rounded-full bg-champagne/15 text-champagne flex items-center justify-center text-xl">✦</div>
+                      <p class="font-serif text-lg">Ready for the Runway</p>
+                      <p class="text-xs text-neutral-500">Generate an AI Virtual Try-On or export a 1080×1350 PNG Lookbook Card.</p>
+                    </div>
+                  `}
+                </div>
+
+                <button onclick="generateTryOnPreview()" ${state.tryOnLoading ? 'disabled' : ''} class="w-full py-3.5 rounded-2xl bg-obsidian text-alabaster dark:bg-champagne dark:text-obsidian text-sm font-semibold shadow-editorial hover:opacity-90 disabled:opacity-50 transition">
+                  ✦ Generate Virtual Try-On
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Saved Looks -->
+          <div class="pt-2 space-y-4">
+            <h3 class="font-serif text-2xl font-medium">Saved Looks <span class="text-sm font-sans text-neutral-400 font-normal">(${state.savedLooks.length})</span></h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              ${state.savedLooks.map(look => {
+                const lookItems = look.itemIds.map(getAnyItemById).filter(Boolean);
+                return `
+                  <div class="p-5 rounded-3xl bg-white dark:bg-obsidianCard border border-taupe dark:border-white/10 shadow-editorial flex flex-col justify-between space-y-4">
+                    <div class="flex items-start justify-between gap-2">
+                      <div>
+                        <div class="text-[10px] uppercase tracking-widest text-champagne font-semibold">${escapeHtml(look.occasion || 'Editorial')}</div>
+                        <h4 class="font-serif text-lg font-medium">${escapeHtml(look.title)}</h4>
+                      </div>
+                      <span class="px-2.5 py-1 rounded-full bg-ivory dark:bg-white/5 text-xs font-semibold">${look.harmonyScore || 92}/100</span>
+                    </div>
+                    <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1">
+                      ${lookItems.map(i => `<div class="w-14 h-14 rounded-xl bg-ivory dark:bg-white/5 border border-taupe/60 dark:border-white/10 shrink-0 flex items-center justify-center p-1" title="${escapeHtml(i.name)}">${renderItemThumbnail(i, 'w-12 h-12')}</div>`).join('')}
+                    </div>
+                    <div class="flex items-center justify-between pt-2 border-t border-taupe/70 dark:border-white/10">
+                      <button onclick="loadSavedLookIntoStudio('${look.id}')" class="text-xs font-semibold text-champagne hover:underline">Load in Studio →</button>
+                      <button onclick="deleteSavedLook('${look.id}')" class="text-xs text-neutral-400 hover:text-red-500">Delete</button>
+                    </div>
+                  </div>`;
+              }).join('')}
+            </div>
+          </div>
+        </div>`;
+    }
+
+    function renderColorHarmonyCard(harmony, items) {
+      return `
+        <div class="p-5 rounded-3xl bg-obsidian text-alabaster dark:bg-white/[0.04] border border-obsidian dark:border-white/10 shadow-editorial flex flex-col justify-between">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] uppercase tracking-[0.22em] text-champagne font-semibold">Color Harmony Meter</span>
+            <span class="font-serif text-2xl text-champagne">${harmony.score}<span class="text-xs opacity-60">/100</span></span>
+          </div>
+          <div class="my-3">
+            <div class="text-sm font-medium mb-1.5">${harmony.scheme}</div>
+            <div class="w-full h-1.5 rounded-full bg-white/15 overflow-hidden"><div class="h-full bg-champagne rounded-full transition-all duration-500" style="width:${harmony.score}%"></div></div>
+          </div>
+          <div class="flex items-center justify-between gap-2">
+            <p class="text-[11px] text-neutral-300 leading-snug">${harmony.note}</p>
+            <div class="flex -space-x-1.5 shrink-0">${items.map(i => `<span class="w-5 h-5 rounded-full border-2 border-obsidian" style="background:${i.colorHex}"></span>`).join('')}</div>
+          </div>
+        </div>`;
+    }
+
+    function setStudioMode(mode) { state.studioMode = mode; if (mode === 'collage' && state.collageItems.length === 0) syncCollageFromSlots(); renderActiveView(); }
+
+    function bindCollageDragEvents() {
+      const canvas = document.getElementById('collage-canvas');
+      if (!canvas) return;
+      let dragging = null;
+      canvas.querySelectorAll('.collage-item').forEach(el => {
+        el.addEventListener('pointerdown', (e) => {
+          const id = el.dataset.collageId;
+          state.collageSelectedId = id;
+          const obj = state.collageItems.find(c => c.id === id);
+          if (!obj) return;
+          dragging = { el, obj, rect: canvas.getBoundingClientRect(), startX: e.clientX, startY: e.clientY, origX: obj.x, origY: obj.y };
+          el.setPointerCapture(e.pointerId);
+        });
+        el.addEventListener('pointermove', (e) => {
+          if (!dragging || dragging.el !== el) return;
+          const dx = ((e.clientX - dragging.startX) / dragging.rect.width) * 100;
+          const dy = ((e.clientY - dragging.startY) / dragging.rect.height) * 100;
+          dragging.obj.x = Math.max(-5, Math.min(82, dragging.origX + dx));
+          dragging.obj.y = Math.max(-5, Math.min(78, dragging.origY + dy));
+          el.style.left = dragging.obj.x + '%'; el.style.top = dragging.obj.y + '%';
+        });
+        el.addEventListener('pointerup', () => { if (dragging) { dragging = null; renderActiveView(); } });
+      });
+    }
+    function updateCollageTransform(prop, val) {
+      const obj = state.collageItems.find(c => c.id === state.collageSelectedId);
+      if (!obj) return;
+      obj[prop] = val;
+      const el = document.querySelector(`[data-collage-id="${obj.id}"]`);
+      if (el) el.style.transform = `scale(${obj.scale}) rotate(${obj.rotate}deg)`;
+    }
+    function shiftCollageLayer(delta) {
+      const obj = state.collageItems.find(c => c.id === state.collageSelectedId);
+      if (!obj) return;
+      obj.z = Math.max(1, Math.min(20, (obj.z || 2) + delta));
+      renderActiveView();
+    }
+
+    async function exportLookbookPNG() {
+      const items = getActiveStudioItems();
+      if (!items.length) { showToast('Add at least one piece to export', 'warning'); return; }
+      showToast('Rendering 1080×1350 Lookbook Card...', 'gold');
+
+      const W = 1080, H = 1350;
+      const canvas = document.createElement('canvas');
+      canvas.width = W; canvas.height = H;
+      const ctx = canvas.getContext('2d');
+
+      ctx.fillStyle = '#FAF8F5'; ctx.fillRect(0, 0, W, H);
+      ctx.strokeStyle = '#C6A46C'; ctx.lineWidth = 2; ctx.strokeRect(42, 42, W - 84, H - 84);
+
+      const w = state.weather, harmony = calculateColorHarmony(items);
+      ctx.fillStyle = '#C6A46C'; ctx.font = '600 18px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText(`ATELIER AI  ·  ${formatTemp(w.tempC)} ${w.conditionLabel.toUpperCase()}`, 84, 106);
+
+      ctx.fillStyle = '#141414'; ctx.font = '500 50px "Playfair Display", Georgia, serif';
+      ctx.fillText(state.studioTitle || 'Atelier Signature Look', 84, 174);
+
+      ctx.fillStyle = '#F2EFE9'; ctx.fillRect(84, 202, 380, 42);
+      ctx.fillStyle = '#9A783C'; ctx.font = '600 17px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText(`${harmony.scheme.toUpperCase()}  ·  ${harmony.score}/100`, 102, 230);
+
+      const loadImg = (item) => new Promise((res) => {
+        const img = new Image(); img.crossOrigin = 'anonymous';
+        img.onload = () => res(img); img.onerror = () => res(null);
+        img.src = item.image || ('data:image/svg+xml;charset=utf-8,' + encodeURIComponent(getGarmentSVG(item.category, item.colorHex, item.name)));
+      });
+      const loaded = await Promise.all(items.map(loadImg));
+
+      ctx.fillStyle = '#F2EFE9'; ctx.fillRect(84, 272, W - 168, 610);
+      const cols = Math.min(items.length, 3), cellW = (W - 168) / cols, rows = Math.ceil(items.length / cols), cellH = 610 / rows;
+      loaded.forEach((img, idx) => {
+        if (!img) return;
+        const col = idx % cols, row = Math.floor(idx / cols);
+        const cx = 84 + col * cellW + cellW / 2, cy = 272 + row * cellH + cellH / 2;
+        const maxSize = Math.min(cellW, cellH) * 0.78;
+        const sc = Math.min(maxSize / (img.width || 120), maxSize / (img.height || 120));
+        ctx.drawImage(img, cx - (img.width || 120) * sc / 2, cy - (img.height || 120) * sc / 2, (img.width || 120) * sc, (img.height || 120) * sc);
+      });
+
+      ctx.fillStyle = '#737373'; ctx.font = '600 15px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('COLOR PALETTE', 84, 936);
+      items.forEach((item, idx) => {
+        ctx.fillStyle = item.colorHex || '#141414';
+        ctx.beginPath(); ctx.arc(104 + idx * 54, 972, 18, 0, Math.PI * 2); ctx.fill();
+        ctx.strokeStyle = 'rgba(0,0,0,0.12)'; ctx.lineWidth = 1.5; ctx.stroke();
+      });
+
+      const totalVal = items.reduce((s, i) => s + (Number(i.price) || 0), 0);
+      ctx.fillStyle = '#141414'; ctx.font = '600 16px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('ENSEMBLE BREAKDOWN', 84, 1040);
+      ctx.fillStyle = '#C6A46C'; ctx.fillText(`TOTAL: $${totalVal.toLocaleString()}`, W - 240, 1040);
+
+      let y = 1084;
+      items.slice(0, 5).forEach(item => {
+        ctx.fillStyle = '#141414'; ctx.font = '500 20px "Playfair Display", Georgia, serif';
+        ctx.fillText(`${item.name}${item.isWishlist ? ' (Wishlist)' : ''}`, 84, y);
+        ctx.fillStyle = '#737373'; ctx.font = '400 16px "Plus Jakarta Sans", sans-serif';
+        ctx.fillText(`${item.brand || 'Archive'} · ${item.colorName}`, 580, y);
+        ctx.fillStyle = '#141414'; ctx.fillText(`$${item.price}`, W - 154, y);
+        y += 40;
+      });
+
+      ctx.fillStyle = '#A3A3A3'; ctx.font = '500 14px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('CURATED WITH ATELIER AI', 84, H - 64);
+
+      const link = document.createElement('a');
+      link.download = `atelier-lookbook-${Date.now()}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      showToast('1080×1350 Lookbook Card downloaded!', 'gold');
+    }
+
+    function openSlotPicker(category) {
+      document.getElementById('slot-picker-title').textContent = `Select ${category}`;
+      const combined = [...state.wardrobe.filter(i => i.category === category), ...state.wishlist.filter(w => w.category === category)];
+      document.getElementById('slot-picker-grid').innerHTML = combined.length ? combined.map(item => `
+        <button onclick="selectStudioItem('${category}', '${item.id}')" class="p-3 rounded-2xl border text-left transition relative ${state.studioSlots[category] === item.id ? 'border-champagne bg-champagne/10' : 'border-taupe dark:border-white/10 bg-white dark:bg-white/5 hover:border-champagne'}">
+          ${item.isWishlist ? '<span class="absolute top-2 right-2 px-1.5 py-0.5 rounded-md bg-champagne text-obsidian text-[9px] font-bold uppercase">Wishlist</span>' : ''}
+          <div class="h-24 flex items-center justify-center mb-2">${renderItemThumbnail(item, 'w-20 h-20')}</div>
+          <div class="text-xs font-medium truncate">${escapeHtml(item.name)}</div>
+          <div class="text-[10px] text-neutral-400 truncate">${escapeHtml(item.brand || 'Archive')} · ${escapeHtml(item.colorName)}</div>
+        </button>`).join('') : `<div class="col-span-full py-8 text-center text-sm text-neutral-500">No items in ${category}.</div>`;
+      document.getElementById('slot-picker-modal').classList.remove('hidden');
+      document.getElementById('slot-picker-modal').classList.add('flex');
+    }
+    function closeSlotPicker() { document.getElementById('slot-picker-modal').classList.add('hidden'); document.getElementById('slot-picker-modal').classList.remove('flex'); }
+    function selectStudioItem(cat, itemId) { state.studioSlots[cat] = itemId; syncCollageFromSlots(); state.tryOnResultImage = null; state.tryOnFallbackMode = false; persistState(); closeSlotPicker(); renderActiveView(); }
+    function clearStudioSlot(cat) { state.studioSlots[cat] = null; state.studioLocks[cat] = false; syncCollageFromSlots(); persistState(); renderActiveView(); }
+    function toggleStudioLock(cat) { state.studioLocks[cat] = !state.studioLocks[cat]; renderActiveView(); }
+
+    function shuffleStudio() {
+      STUDIO_CATEGORIES.forEach(cat => {
+        if (state.studioLocks[cat]) return;
+        const pool = state.wardrobe.filter(i => i.category === cat);
+        if (pool.length) state.studioSlots[cat] = pool[Math.floor(Math.random() * pool.length)].id;
+      });
+      syncCollageFromSlots(); state.tryOnResultImage = null; state.tryOnFallbackMode = false; persistState(); renderActiveView();
+      showToast('Shuffled unlocked slots');
+    }
+
+    async function aiCompleteStudioLook() {
+      const btn = document.getElementById('ai-complete-btn');
+      if (btn) { btn.disabled = true; btn.textContent = '✦ Styling...'; }
+      try {
+        const locked = STUDIO_CATEGORIES.filter(c => state.studioLocks[c] && state.studioSlots[c]).map(c => ({ slot: c, item: getAnyItemById(state.studioSlots[c]) }));
+        const closet = state.wardrobe.map(i => ({ id: i.id, name: i.name, category: i.category, color: i.colorName }));
+        const data = await fetchWithRetry(GEMINI_TEXT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ role: 'user', parts: [{ text: `Complete an editorial outfit from: ${JSON.stringify(closet)}. Climate: ${formatTemp(state.weather.tempC)} ${state.weather.conditionLabel}. Locked: ${JSON.stringify(locked)}. Return title and exact IDs for Outerwear, Tops, Bottoms, Footwear, Accessories.` }] }],
+            generationConfig: {
+              responseMimeType: 'application/json',
+              responseSchema: {
+                type: 'OBJECT',
+                properties: {
+                  title: { type: 'STRING' }, Outerwear: { type: 'STRING', nullable: true }, Tops: { type: 'STRING', nullable: true },
+                  Bottoms: { type: 'STRING', nullable: true }, Footwear: { type: 'STRING', nullable: true }, Accessories: { type: 'STRING', nullable: true }
+                }
+              }
+            }
+          })
+        });
+        const p = JSON.parse(data?.candidates?.[0]?.content?.parts?.[0]?.text || '{}');
+        if (p.title) state.studioTitle = p.title;
+        STUDIO_CATEGORIES.forEach(c => { if (!state.studioLocks[c] && p[c] && getAnyItemById(p[c])) state.studioSlots[c] = p[c]; });
+        syncCollageFromSlots(); state.tryOnResultImage = null; persistState(); renderActiveView();
+        showToast(`AI completed "${state.studioTitle}"`, 'gold');
+      } catch (_) { shuffleStudio(); }
+    }
+
+    function handleTryOnUserPhoto(e) {
+      const file = e.target.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = () => { state.tryOnUserPhoto = { dataUrl: reader.result, base64: reader.result.split(',')[1], mimeType: file.type || 'image/jpeg' }; renderActiveView(); showToast('Photo uploaded for Virtual Try-On', 'gold'); };
+      reader.readAsDataURL(file);
+    }
+
+    async function generateTryOnPreview() {
+      const items = getActiveStudioItems();
+      if (!items.length) { showToast('Select at least one garment first', 'warning'); return; }
+      state.tryOnLoading = true; state.tryOnResultImage = null; state.tryOnFallbackMode = false; renderActiveView();
+
+      const outfitDesc = items.map(i => `${i.colorName} ${i.name}`).join(', ');
+      const settingDesc = state.tryOnSetting === 'Street Style' ? 'Parisian cobblestone street style photography, overcast daylight'
+        : state.tryOnSetting === 'Rooftop Dinner' ? 'Golden hour luxury rooftop terrace, warm candlelight'
+        : 'Vogue minimalist warm alabaster studio backdrop, crisp editorial lighting';
+
+      try {
+        const parts = state.tryOnUserPhoto
+          ? [{ text: `Dress the person in this photo in the following luxury editorial outfit: ${outfitDesc}. Setting: ${settingDesc}. Keep their face and natural proportions. Photorealistic, no text.` }, { inlineData: { mimeType: state.tryOnUserPhoto.mimeType, data: state.tryOnUserPhoto.base64 } }]
+          : [{ text: `Full-body luxury fashion editorial lookbook photograph of a stylish ${state.tryOnProfile} model wearing: ${outfitDesc}. Setting: ${settingDesc}. Shot on medium-format film, Vogue and SSENSE aesthetic, no text.` }];
+
+        const data = await fetchWithRetry(GEMINI_IMAGE_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ contents: [{ role: 'user', parts }], generationConfig: { responseModalities: ['IMAGE'], imageConfig: { aspectRatio: '3:4' } } })
+        });
+        const imgPart = data?.candidates?.[0]?.content?.parts?.find(p => p.inlineData);
+        if (imgPart?.inlineData?.data) {
+          state.tryOnResultImage = `data:${imgPart.inlineData.mimeType || 'image/png'};base64,${imgPart.inlineData.data}`;
+          showToast('Virtual Try-On rendered!', 'gold');
+        } else { state.tryOnFallbackMode = true; }
+      } catch (_) {
+        state.tryOnFallbackMode = true;
+        showToast('Image model busy — displaying editorial flat-lay');
+      } finally { state.tryOnLoading = false; renderActiveView(); }
+    }
+
+    function openSaveLookModal() {
+      if (!getActiveStudioItems().length) { showToast('Add at least one piece first', 'warning'); return; }
+      document.getElementById('save-look-title-input').value = state.studioTitle || '';
+      document.getElementById('save-look-occasion-input').value = '';
+      document.getElementById('save-look-day-input').value = '';
+      document.getElementById('save-look-modal').classList.remove('hidden');
+      document.getElementById('save-look-modal').classList.add('flex');
+    }
+    function closeSaveLookModal() { document.getElementById('save-look-modal').classList.add('hidden'); document.getElementById('save-look-modal').classList.remove('flex'); }
+    function confirmSaveStudioLook() {
+      const title = document.getElementById('save-look-title-input').value.trim() || 'Editorial Look';
+      const occasion = document.getElementById('save-look-occasion-input').value.trim() || 'Editorial';
+      const assignDay = document.getElementById('save-look-day-input').value;
+      const itemIds = STUDIO_CATEGORIES.map(c => state.studioSlots[c]).filter(Boolean);
+      const harmony = calculateColorHarmony(itemIds.map(getAnyItemById).filter(Boolean));
+      const newLook = { id: 'look-' + Date.now(), title, occasion, harmonyScore: harmony.score, itemIds, createdAt: new Date().toISOString() };
+      state.savedLooks.unshift(newLook);
+      if (assignDay) state.weeklyPlan[assignDay] = { lookId: newLook.id, worn: false };
+      state.studioTitle = title;
+      persistState(); closeSaveLookModal(); renderActiveView();
+      showToast(assignDay ? `Saved "${title}" & assigned to ${assignDay}!` : `Saved "${title}"`, 'gold');
+    }
+    function loadSavedLookIntoStudio(lookId) {
+      const look = state.savedLooks.find(l => l.id === lookId);
+      if (!look) return;
+      state.studioTitle = look.title;
+      state.studioSlots = { Outerwear: null, Tops: null, Bottoms: null, Footwear: null, Accessories: null };
+      look.itemIds.forEach(id => { const item = getAnyItemById(id); if (item && state.studioSlots.hasOwnProperty(item.category)) state.studioSlots[item.category] = item.id; });
+      syncCollageFromSlots(); state.tryOnResultImage = null; persistState(); switchTab('studio');
+    }
+    function deleteSavedLook(lookId) { state.savedLooks = state.savedLooks.filter(l => l.id !== lookId); persistState(); renderActiveView(); }
+
+    // =========================================================================
+    // 10. VIEW 4: GAP ANALYZER & WISHLIST
+    // =========================================================================
+    function computeClosetMetrics() {
+      const cats = {};
+      STUDIO_CATEGORIES.forEach(c => cats[c] = state.wardrobe.filter(i => i.category === c).length);
+      const possibleCombos = Math.max(1, cats.Tops) * Math.max(1, cats.Bottoms) * Math.max(1, cats.Footwear) * Math.max(1, cats.Outerwear);
+      const versatility = Math.min(99, Math.round(54 + Math.min(45, Math.log2(possibleCombos + 1) * 7.5)));
+      const neutrals = state.wardrobe.filter(i => hexToHSL(i.colorHex).s < 26).length;
+      const neutralPct = state.wardrobe.length ? Math.round((neutrals / state.wardrobe.length) * 100) : 70;
+      return { versatility, neutralPct, accentPct: 100 - neutralPct };
+    }
+
+    function renderGapsWishlistView() {
+      const m = computeClosetMetrics();
+      return `
+        <div class="space-y-6 animate-fade-up">
+          <div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div>
+              <p class="text-[11px] uppercase tracking-[0.25em] text-champagne font-semibold mb-1">Strategic Curation</p>
+              <h2 class="font-serif text-3xl sm:text-4xl font-medium">Gap Analyzer & Wishlist</h2>
+            </div>
+            <div class="flex gap-2">
+              <button onclick="openWishlistModal()" class="px-4 py-2.5 rounded-2xl border border-taupe dark:border-white/15 bg-white dark:bg-white/5 text-xs font-semibold hover:border-champagne">+ Add Wishlist</button>
+              <button onclick="runGapAnalysis()" ${state.gapLoading ? 'disabled' : ''} class="px-5 py-2.5 rounded-2xl bg-obsidian text-alabaster dark:bg-champagne dark:text-obsidian text-xs font-semibold shadow-editorial disabled:opacity-50">
+                ${state.gapLoading ? '✦ Auditing Closet...' : '✦ Find Multiplier Pieces'}
+              </button>
+            </div>
+          </div>
+
+          <!-- Versatility + Neutral/Accent Metrics -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div class="p-6 rounded-3xl bg-white dark:bg-obsidianCard border border-taupe dark:border-white/10 shadow-editorial space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] uppercase tracking-widest text-neutral-400 font-semibold">Closet Versatility Score</span>
+                <span class="font-serif text-3xl text-champagne">${m.versatility}<span class="text-sm text-neutral-400">/100</span></span>
+              </div>
+              <div class="w-full h-2 rounded-full bg-ivory dark:bg-white/10 overflow-hidden"><div class="h-full bg-champagne rounded-full" style="width:${m.versatility}%"></div></div>
+              <p class="text-xs text-neutral-500">Measures cross-category pairing depth across your ${state.wardrobe.length} pieces.</p>
+            </div>
+
+            <div class="p-6 rounded-3xl bg-white dark:bg-obsidianCard border border-taupe dark:border-white/10 shadow-editorial space-y-3">
+              <div class="flex items-center justify-between">
+                <span class="text-[11px] uppercase tracking-widest text-neutral-400 font-semibold">Neutral-to-Accent Ratio</span>
+                <span class="text-xs font-semibold">${m.neutralPct}% Neutral · ${m.accentPct}% Accent</span>
+              </div>
+              <div class="w-full h-2 rounded-full overflow-hidden flex bg-ivory dark:bg-white/10">
+                <div class="h-full bg-obsidian dark:bg-ivory" style="width:${m.neutralPct}%"></div>
+                <div class="h-full bg-champagne" style="width:${m.accentPct}%"></div>
+              </div>
+              <p class="text-xs text-neutral-500">Editorial ideal is 70–80% core neutrals paired with 20–30% intentional accents.</p>
+            </div>
+          </div>
+
+          <!-- AI Multiplier Pieces -->
+          ${state.gapResults.length ? `
+            <div class="space-y-3">
+              <h3 class="font-serif text-2xl font-medium">Recommended Multiplier Pieces</h3>
+              <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                ${state.gapResults.map((g, idx) => `
+                  <div class="p-5 rounded-3xl bg-white dark:bg-obsidianCard border border-champagne/40 shadow-editorial flex flex-col justify-between space-y-4">
+                    <div class="space-y-3">
+                      <div class="flex items-center justify-between">
+                        <span class="text-[10px] uppercase tracking-widest text-neutral-400 font-semibold">${escapeHtml(g.category)}</span>
+                        <span class="px-2.5 py-0.5 rounded-full bg-champagne/15 text-champagneDark dark:text-champagneLight text-[10px] font-bold">${escapeHtml(g.unlocks || '+6 outfits')}</span>
+                      </div>
+                      <div class="h-24 rounded-2xl bg-ivory dark:bg-white/5 flex items-center justify-center p-2">${getGarmentSVG(g.category, g.colorHex || '#4A3728', g.name)}</div>
+                      <div>
+                        <h4 class="font-serif text-base font-medium">${escapeHtml(g.name)}</h4>
+                        <div class="text-xs text-neutral-400">${escapeHtml(g.colorName)} · ~$${g.price || 220}</div>
+                        <p class="text-xs text-neutral-500 dark:text-neutral-400 mt-2 leading-relaxed">${escapeHtml(g.reason)}</p>
+                      </div>
+                    </div>
+                    <div class="flex gap-2 pt-2 border-t border-taupe/70 dark:border-white/10">
+                      <button onclick="addGapToWishlist(${idx})" class="flex-1 py-2 rounded-xl border border-taupe dark:border-white/15 text-[11px] font-semibold hover:border-champagne">+ Wishlist</button>
+                      <button onclick="testGapInStudio(${idx})" class="flex-1 py-2 rounded-xl bg-obsidian text-alabaster dark:bg-champagne dark:text-obsidian text-[11px] font-semibold">❖ Test in Studio</button>
+                    </div>
+                  </div>`).join('')}
+              </div>
+            </div>
+          ` : `
+            <div class="p-8 rounded-3xl bg-white dark:bg-obsidianCard border border-dashed border-taupe dark:border-white/15 text-center space-y-2">
+              <div class="text-2xl text-champagne">✧</div>
+              <p class="font-serif text-lg">Discover Your Missing Multiplier Pieces</p>
+              <p class="text-xs text-neutral-500 max-w-md mx-auto">Click "Find Multiplier Pieces" to let Gemini identify 3 strategic pieces that unlock the most new outfits with what you already own.</p>
+            </div>
+          `}
+
+          <!-- Wishlist -->
+          <div class="space-y-4">
+            <h3 class="font-serif text-2xl font-medium">Wishlist <span class="text-sm font-sans text-neutral-400 font-normal">(${state.wishlist.length})</span></h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              ${state.wishlist.map(wl => `
+                <div class="p-5 rounded-3xl bg-white dark:bg-obsidianCard border border-taupe dark:border-white/10 shadow-editorial flex flex-col justify-between space-y-4">
+                  <div class="flex items-center gap-3.5">
+                    <div class="w-16 h-16 rounded-2xl bg-ivory dark:bg-white/5 flex items-center justify-center shrink-0">${renderItemThumbnail(wl, 'w-14 h-14')}</div>
+                    <div class="min-w-0">
+                      <div class="text-[10px] uppercase tracking-widest text-champagne font-semibold">${escapeHtml(wl.category)} · $${wl.price}</div>
+                      <h4 class="font-serif text-base font-medium truncate">${escapeHtml(wl.name)}</h4>
+                      <div class="text-xs text-neutral-400">${escapeHtml(wl.colorName)}</div>
+                    </div>
+                  </div>
+                  ${wl.reason ? `<p class="text-xs text-neutral-500 leading-relaxed">${escapeHtml(wl.reason)}</p>` : ''}
+                  <div class="flex flex-wrap gap-2 pt-2 border-t border-taupe/70 dark:border-white/10">
+                    <button onclick="testWishlistInStudio('${wl.id}')" class="flex-1 py-2 rounded-xl bg-obsidian text-alabaster dark:bg-champagne dark:text-obsidian text-xs font-semibold">❖ Test in Studio</button>
+                    <button onclick="moveWishlistToCloset('${wl.id}')" class="px-3 py-2 rounded-xl border border-taupe dark:border-white/15 text-xs hover:border-champagne">✓ Bought</button>
+                    <button onclick="deleteWishlistItem('${wl.id}')" class="px-2.5 py-2 text-xs text-neutral-400 hover:text-red-500">✕</button>
+                  </div>
+                </div>`).join('')}
+            </div>
+          </div>
+        </div>`;
+    }
+
+    async function runGapAnalysis() {
+      state.gapLoading = true; renderActiveView();
+      try {
+        const closet = state.wardrobe.map(i => ({ name: i.name, category: i.category, color: i.colorName, formality: i.formality }));
+        const data = await fetchWithRetry(GEMINI_TEXT_URL, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ role: 'user', parts: [{ text: `Analyze this wardrobe: ${JSON.stringify(closet)}. Recommend exactly 3 missing "Multiplier Pieces" that unlock the most new outfits. Return JSON array with name, category (Outerwear/Tops/Bottoms/Footwear/Accessories), colorName, colorHex, price (USD), unlocks (e.g. "+7 outfits"), and reason (1 concise sentence).` }] }],
+            generationConfig: {
+              responseMimeType: 'application/json',
+              responseSchema: {
+                type: 'ARRAY',
+                items: {
+                  type: 'OBJECT',
+                  properties: { name: { type: 'STRING' }, category: { type: 'STRING' }, colorName: { type: 'STRING' }, colorHex: { type: 'STRING' }, price: { type: 'NUMBER' }, unlocks: { type: 'STRING' }, reason: { type: 'STRING' } },
+                  required: ['name', 'category', 'colorName', 'colorHex', 'price', 'unlocks', 'reason']
+                }
+              }
+            }
+          })
+        });
+        state.gapResults = JSON.parse(data?.candidates?.[0]?.content?.parts?.[0]?.text || '[]');
+        showToast('Wardrobe gap audit complete!', 'gold');
+      } catch (_) {
+        state.gapResults = [
+          { name: 'Espresso Suede Penny Loafers', category: 'Footwear', colorName: 'Espresso Suede', colorHex: '#4A3728', price: 295, unlocks: '+8 outfits', reason: 'Bridges your tailored wool trousers and raw denim for smart-casual evenings.' },
+          { name: 'Crisp Striped Poplin Shirt', category: 'Tops', colorName: 'Sky Stripe', colorHex: '#9EB4C7', price: 165, unlocks: '+6 outfits', reason: 'Adds effortless daytime polish under your blazer, trench, and wool coat.' },
+          { name: 'Sculpted Leather Belt', category: 'Accessories', colorName: 'Obsidian & Gold', colorHex: '#1A1A1A', price: 140, unlocks: '+9 outfits', reason: 'Anchors wide-leg trousers and tucked knits with quiet-luxury hardware.' }
+        ];
+      } finally { state.gapLoading = false; renderActiveView(); }
+    }
+
+    function openWishlistModal() { document.getElementById('add-wishlist-modal').classList.remove('hidden'); document.getElementById('add-wishlist-modal').classList.add('flex'); }
+    function closeWishlistModal() { document.getElementById('add-wishlist-modal').classList.add('hidden'); document.getElementById('add-wishlist-modal').classList.remove('flex'); }
+    function handleAddWishlistSubmit(e) {
+      e.preventDefault();
+      state.wishlist.unshift({
+        id: 'wl-' + Date.now(), name: document.getElementById('wl-name').value.trim(), brand: 'Wishlist',
+        category: document.getElementById('wl-category').value, price: Number(document.getElementById('wl-price').value) || 0,
+        colorHex: document.getElementById('wl-color-hex').value, colorName: document.getElementById('wl-color-name').value.trim() || 'Neutral',
+        reason: document.getElementById('wl-reason').value.trim(), season: 'All-Season', formality: 'Smart Casual', isWishlist: true
+      });
+      persistState(); closeWishlistModal(); renderActiveView();
+      showToast('Added to Wishlist', 'gold');
+    }
+    function addGapToWishlist(idx) {
+      const g = state.gapResults[idx]; if (!g) return;
+      state.wishlist.unshift({ id: 'wl-' + Date.now(), name: g.name, brand: 'Multiplier Pick', category: STUDIO_CATEGORIES.includes(g.category) ? g.category : 'Tops', colorName: g.colorName, colorHex: g.colorHex || '#4A3728', price: Number(g.price) || 200, reason: g.reason, unlocks: g.unlocks, season: 'All-Season', formality: 'Smart Casual', isWishlist: true });
+      persistState(); renderActiveView();
+      showToast(`Added "${g.name}" to Wishlist!`, 'gold');
+    }
+    function testGapInStudio(idx) { addGapToWishlist(idx); testWishlistInStudio(state.wishlist[0].id); }
+    function testWishlistInStudio(wlId) {
+      const wl = state.wishlist.find(w => w.id === wlId); if (!wl) return;
+      state.studioSlots[wl.category] = wl.id;
+      state.studioLocks[wl.category] = true;
+      state.studioTitle = `Testing: ${wl.name}`;
+      syncCollageFromSlots(); state.tryOnResultImage = null; persistState(); switchTab('studio');
+      showToast(`Testing "${wl.name}" with your closet in Studio!`, 'gold');
+    }
+    function moveWishlistToCloset(wlId) {
+      const wl = state.wishlist.find(w => w.id === wlId); if (!wl) return;
+      state.wardrobe.unshift({ ...wl, id: 'item-' + Date.now(), isWishlist: false, wears: 0, tags: ['new-arrival'], image: null, createdAt: Date.now() });
+      state.wishlist = state.wishlist.filter(w => w.id !== wlId);
+      persistState(); renderActiveView();
+      showToast(`Moved "${wl.name}" to your Wardrobe!`, 'gold');
+    }
+    function deleteWishlistItem(wlId) { state.wishlist = state.wishlist.filter(w => w.id !== wlId); persistState(); renderActiveView(); }
+
+    // =========================================================================
+    // 11. VIEW 5: PACK MY BAG (CAPSULE TRIP PLANNER)
+    // =========================================================================
+    function renderPackView() {
+      const f = state.tripForm, plan = state.tripPlan;
+      const checked = plan ? plan.checklist.filter(c => c.checked).length : 0;
+      const total = plan ? plan.checklist.length : 0;
+      const pct = total ? Math.round((checked / total) * 100) : 0;
+
+      return `
+        <div class="space-y-6 animate-fade-up">
+          <div>
+            <p class="text-[11px] uppercase tracking-[0.25em] text-champagne font-semibold mb-1">Capsule Travel Stylist</p>
+            <h2 class="font-serif text-3xl sm:text-4xl font-medium">Pack My Bag</h2>
+            <p class="text-sm text-neutral-500 mt-1">Generate a streamlined carry-on capsule & day-by-day itinerary from your actual closet.</p>
+          </div>
+
+          <form onsubmit="generateTripPlan(event)" class="p-5 rounded-3xl bg-white dark:bg-obsidianCard border border-taupe dark:border-white/10 shadow-editorial grid grid-cols-1 md:grid-cols-4 gap-3 items-end">
+            <div class="md:col-span-2">
+              <label class="block text-[10px] uppercase tracking-widest text-neutral-400 mb-1">Destination</label>
+              <input type="text" required value="${escapeHtml(f.destination)}" oninput="state.tripForm.destination=this.value" placeholder="e.g., Milan, Tokyo, Paris" class="w-full px-4 py-2.5 rounded-xl bg-ivory/70 dark:bg-white/5 border border-taupe dark:border-white/15 text-sm" />
+            </div>
+            <div>
+              <label class="block text-[10px] uppercase tracking-widest text-neutral-400 mb-1">Days</label>
+              <input type="number" min="2" max="14" value="${f.days}" oninput="state.tripForm.days=Number(this.value)||3" class="w-full px-4 py-2.5 rounded-xl bg-ivory/70 dark:bg-white/5 border border-taupe dark:border-white/15 text-sm" />
+            </div>
+            <div>
+              <label class="block text-[10px] uppercase tracking-widest text-neutral-400 mb-1">Vibe</label>
+              <select onchange="state.tripForm.vibe=this.value" class="w-full px-3.5 py-2.5 rounded-xl bg-ivory/70 dark:bg-obsidianBg border border-taupe dark:border-white/15 text-sm">
+                ${['City Break', 'Business', 'Resort / Beach', 'Winter Escape'].map(v => `<option value="${v}" ${f.vibe === v ? 'selected' : ''}>${v}</option>`).join('')}
+              </select>
+            </div>
+            <div class="md:col-span-4 flex justify-end">
+              <button type="submit" ${state.tripLoading ? 'disabled' : ''} class="px-6 py-3 rounded-2xl bg-obsidian text-alabaster dark:bg-champagne dark:text-obsidian text-xs font-semibold shadow-editorial disabled:opacity-50">
+                ${state.tripLoading ? '✦ Packing Capsule...' : '✦ Generate Capsule Packing List'}
+              </button>
+            </div>
+          </form>
+
+          ${plan ? `
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+              <!-- Checklist -->
+              <div class="lg:col-span-5 p-6 rounded-3xl bg-white dark:bg-obsidianCard border border-taupe dark:border-white/10 shadow-editorial space-y-4">
+                <div class="flex items-center justify-between">
+                  <div>
+                    <div class="text-[10px] uppercase tracking-widest text-champagne font-semibold">${escapeHtml(plan.destination)} · ${plan.days} Days</div>
+                    <h3 class="font-serif text-xl font-medium">Packing Checklist</h3>
+                  </div>
+                  <span class="text-xs font-bold text-champagne">${pct}%</span>
+                </div>
+                <div class="w-full h-1.5 rounded-full bg-ivory dark:bg-white/10 overflow-hidden"><div class="h-full bg-champagne rounded-full transition-all" style="width:${pct}%"></div></div>
+                <div class="space-y-2">
+                  ${plan.checklist.map((c, idx) => {
+                    const item = getItemById(c.itemId);
+                    return `
+                      <label class="flex items-center gap-3 p-3 rounded-2xl bg-ivory/60 dark:bg-white/5 border border-taupe/70 dark:border-white/10 cursor-pointer hover:border-champagne transition">
+                        <input type="checkbox" ${c.checked ? 'checked' : ''} onchange="togglePackCheck(${idx})" class="w-4 h-4 accent-champagne rounded" />
+                        <div class="w-10 h-10 rounded-xl bg-white dark:bg-white/10 flex items-center justify-center shrink-0">${item ? renderItemThumbnail(item, 'w-8 h-8') : '🧳'}</div>
+                        <div class="min-w-0 flex-1 ${c.checked ? 'line-through opacity-50' : ''}">
+                          <div class="text-xs font-semibold truncate">${escapeHtml(item ? item.name : c.label)}</div>
+                          <div class="text-[10px] text-neutral-400">${escapeHtml(item ? item.category : 'Essential')}</div>
+                        </div>
+                      </label>`;
+                  }).join('')}
+                </div>
+              </div>
+
+              <!-- Day-by-Day Itinerary -->
+              <div class="lg:col-span-7 space-y-4">
+                <h3 class="font-serif text-2xl font-medium">Day-by-Day Outfit Itinerary</h3>
+                <div class="space-y-3">
+                  ${plan.itinerary.map(day => {
+                    const dItems = (day.itemIds || []).map(getItemById).filter(Boolean);
+                    return `
+                      <div class="p-5 rounded-3xl bg-white dark:bg-obsidianCard border border-taupe dark:border-white/10 shadow-editorial space-y-3">
+                        <div class="flex items-center justify-between">
+                          <span class="text-[10px] uppercase tracking-widest text-champagne font-bold">Day ${day.day} · ${escapeHtml(day.occasion)}</span>
+                          <span class="text-xs text-neutral-400">${dItems.length} pieces</span>
+                        </div>
+                        <p class="text-xs text-neutral-500 dark:text-neutral-400">${escapeHtml(day.note)}</p>
+                        <div class="flex flex-wrap gap-2">
+                          ${dItems.map(i => `
+                            <div class="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-ivory dark:bg-white/5 border border-taupe/70 dark:border-white/10 text-xs">
+                              <span class="w-2.5 h-2.5 rounded-full" style="background:${i.colorHex}"></span>
+                              <span>${escapeHtml(i.name)}</span>
+                            </div>`).join('')}
+                        </div>
+                      </div>`;
+                  }).join('')}
+                </div>
+              </div>
+            </div>
+          ` : `
+            <div class="p-10 rounded-3xl bg-white dark:bg-obsidianCard border border-dashed border-taupe dark:border-white/15 text-center space-y-2">
+              <div class="text-3xl">🧳</div>
+              <p class="font-serif text-lg">Zero Overpacking</p>
+              <p class="text-xs text-neutral-500 max-w-md mx-auto">Enter your destination, trip length, and vibe above to generate a remixable capsule wardrobe straight from your closet.</p>
+            </div>
+          `}
+        </div>`;
+    }
+
+    async function generateTripPlan(e) {
+      e.preventDefault();
+      state.tripLoading = true; renderActiveView();
+      const { destination, days, vibe } = state.tripForm;
+      try {
+        const closet = state.wardrobe.map(i => ({ id: i.id, name: i.name, category: i.category, season: i.season, color: i.colorName }));
+        const data = await fetchWithRetry(GEMINI_TEXT_URL, {
+          method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ role: 'user', parts: [{ text: `Create a ${days}-day ${vibe} capsule packing plan for ${destination} using ONLY exact item IDs from this closet: ${JSON.stringify(closet)}. Return JSON with packingItemIds (6-9 versatile IDs) and itinerary (array of ${days} days, each with day number, occasion, note, and itemIds subset of packingItemIds).` }] }],
+            generationConfig: {
+              responseMimeType: 'application/json',
+              responseSchema: {
+                type: 'OBJECT',
+                properties: {
+                  packingItemIds: { type: 'ARRAY', items: { type: 'STRING' } },
+                  itinerary: {
+                    type: 'ARRAY',
+                    items: {
+                      type: 'OBJECT',
+                      properties: { day: { type: 'NUMBER' }, occasion: { type: 'STRING' }, note: { type: 'STRING' }, itemIds: { type: 'ARRAY', items: { type: 'STRING' } } },
+                      required: ['day', 'occasion', 'note', 'itemIds']
+                    }
+                  }
+                },
+                required: ['packingItemIds', 'itinerary']
+              }
+            }
+          })
+        });
+        const p = JSON.parse(data?.candidates?.[0]?.content?.parts?.[0]?.text || '{}');
+        const validPack = (p.packingItemIds || []).filter(id => !!getItemById(id));
+        state.tripPlan = {
+          destination, days, vibe,
+          checklist: validPack.map(id => ({ itemId: id, checked: false })),
+          itinerary: p.itinerary || []
+        };
+        persistState();
+        showToast(`Packed ${validPack.length} capsule pieces for ${destination}!`, 'gold');
+      } catch (_) {
+        const fallbackIds = ['item-2', 'item-3', 'item-4', 'item-5', 'item-7', 'item-8', 'item-10', 'item-11', 'item-12'].filter(id => !!getItemById(id));
+        const itinerary = Array.from({ length: days }, (_, idx) => ({
+          day: idx + 1,
+          occasion: idx % 2 === 0 ? 'Daytime Exploring' : 'Evening Dining',
+          note: idx % 2 === 0 ? 'Comfortable layers with versatile footwear.' : 'Elevated monochrome tailoring for dinner.',
+          itemIds: idx % 2 === 0 ? ['item-3', 'item-5', 'item-8', 'item-11'] : ['item-2', 'item-4', 'item-7', 'item-10', 'item-12']
+        }));
+        state.tripPlan = { destination, days, vibe, checklist: fallbackIds.map(id => ({ itemId: id, checked: false })), itinerary };
+        persistState();
+      } finally { state.tripLoading = false; renderActiveView(); }
+    }
+
+    function togglePackCheck(idx) {
+      if (!state.tripPlan?.checklist?.[idx]) return;
+      state.tripPlan.checklist[idx].checked = !state.tripPlan.checklist[idx].checked;
+      persistState(); renderActiveView();
+    }
+
+    // =========================================================================
+    // 12. VIEW 6: CALENDAR & INSIGHTS
+    // =========================================================================
+    function renderCalendarInsightsView() {
+      const totalVal = state.wardrobe.reduce((s, i) => s + (Number(i.price) || 0), 0);
+      const wornItems = state.wardrobe.filter(i => i.wears > 0);
+      const unwornItems = state.wardrobe.filter(i => (Number(i.wears) || 0) === 0);
+      const avgCPW = wornItems.length ? Math.round(wornItems.reduce((s, i) => s + (i.price / i.wears), 0) / wornItems.length) : 0;
+      const mvp = [...wornItems].sort((a, b) => (a.price / a.wears) - (b.price / b.wears))[0];
+
+      const colorMap = new Map();
+      state.wardrobe.forEach(i => {
+        if (!colorMap.has(i.colorHex)) colorMap.set(i.colorHex, { hex: i.colorHex, name: i.colorName, count: 0 });
+        colorMap.get(i.colorHex).count++;
+      });
+      const palette = [...colorMap.values()].sort((a, b) => b.count - a.count);
+
+      return `
+        <div class="space-y-7 animate-fade-up">
+          <div>
+            <p class="text-[11px] uppercase tracking-[0.25em] text-champagne font-semibold mb-1">Weekly Schedule & Analytics</p>
+            <h2 class="font-serif text-3xl sm:text-4xl font-medium">Calendar & Insights</h2>
+          </div>
+
+          <!-- 7-Day Planner -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-7 gap-3">
+            ${DAYS_OF_WEEK.map(day => {
+              const plan = state.weeklyPlan[day];
+              const look = plan?.lookId ? state.savedLooks.find(l => l.id === plan.lookId) : null;
+              const items = look ? look.itemIds.map(getAnyItemById).filter(Boolean) : [];
+              return `
+                <div class="p-4 rounded-3xl bg-white dark:bg-obsidianCard border ${plan?.worn ? 'border-champagne' : 'border-taupe dark:border-white/10'} shadow-editorial flex flex-col justify-between space-y-3 min-h-[200px]">
+                  <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold uppercase tracking-wider">${day.slice(0, 3)}</span>
+                    ${plan?.worn ? '<span class="text-[10px] px-2 py-0.5 rounded-full bg-champagne/20 text-champagne font-bold">✓ Worn</span>' : ''}
+                  </div>
+                  ${look ? `
+                    <div class="space-y-2">
+                      <div class="font-serif text-sm font-medium line-clamp-2">${escapeHtml(look.title)}</div>
+                      <div class="flex -space-x-2">
+                        ${items.slice(0, 4).map(i => `<div class="w-9 h-9 rounded-full bg-ivory dark:bg-white/10 border border-white dark:border-obsidianCard flex items-center justify-center p-1">${renderItemThumbnail(i, 'w-7 h-7')}</div>`).join('')}
+                      </div>
+                    </div>
+                    <div class="space-y-1">
+                      ${!plan.worn ? `<button onclick="markDayWorn('${day}')" class="w-full py-1.5 rounded-xl bg-obsidian text-alabaster dark:bg-champagne dark:text-obsidian text-[11px] font-semibold">Mark Worn</button>` : ''}
+                      <button onclick="clearCalendarDay('${day}')" class="w-full py-1 text-[10px] text-neutral-400 hover:text-red-500">Clear</button>
+                    </div>
+                  ` : `
+                    <div class="flex-1 flex flex-col justify-center">
+                      <select onchange="assignLookToDay('${day}', this.value)" class="w-full px-2.5 py-2 rounded-xl bg-ivory dark:bg-obsidianBg border border-taupe dark:border-white/10 text-[11px]">
+                        <option value="">+ Assign Look</option>
+                        ${state.savedLooks.map(l => `<option value="${l.id}">${escapeHtml(l.title)}</option>`).join('')}
+                      </select>
+                    </div>
+                  `}
+                </div>`;
+            }).join('')}
+          </div>
+
+          <!-- KPI Row -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="p-6 rounded-3xl bg-white dark:bg-obsidianCard border border-taupe dark:border-white/10 shadow-editorial">
+              <div class="text-[10px] uppercase tracking-widest text-neutral-400">Total Closet Value</div>
+              <div class="font-serif text-3xl font-medium mt-1">$${totalVal.toLocaleString()}</div>
+              <div class="text-xs text-champagne mt-1">${state.wardrobe.length} garments</div>
+            </div>
+            <div class="p-6 rounded-3xl bg-white dark:bg-obsidianCard border border-taupe dark:border-white/10 shadow-editorial">
+              <div class="text-[10px] uppercase tracking-widest text-neutral-400">Average Cost-Per-Wear</div>
+              <div class="font-serif text-3xl font-medium mt-1">$${avgCPW}<span class="text-sm text-neutral-400">/wear</span></div>
+              <div class="text-xs text-neutral-500 mt-1">Across ${wornItems.length} worn pieces</div>
+            </div>
+            <div class="p-6 rounded-3xl bg-obsidian text-alabaster dark:bg-white/[0.04] border border-champagne/40 shadow-editorial">
+              <div class="text-[10px] uppercase tracking-widest text-champagne">Most Valuable Piece (MVP)</div>
+              <div class="font-serif text-xl font-medium mt-1 truncate">${mvp ? escapeHtml(mvp.name) : 'Log wears'}</div>
+              <div class="text-xs text-neutral-300 mt-1">${mvp ? `${computeCPW(mvp)} · ${mvp.wears} wears` : 'Track ROI automatically'}</div>
+            </div>
+          </div>
+
+          <!-- Unworn Items Alert + Color Palette Chart -->
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <div class="lg:col-span-6 p-6 rounded-3xl bg-white dark:bg-obsidianCard border border-taupe dark:border-white/10 shadow-editorial space-y-4">
+              <div class="flex items-center justify-between">
+                <div>
+                  <span class="text-[10px] uppercase tracking-widest text-amber-600 dark:text-amber-400 font-bold">Unworn Items Alert</span>
+                  <h3 class="font-serif text-xl font-medium">Sitting Idle (${unwornItems.length})</h3>
+                </div>
+                <span class="text-xs text-neutral-400">0 wears logged</span>
+              </div>
+              ${unwornItems.length ? `
+                <div class="space-y-2.5">
+                  ${unwornItems.map(item => `
+                    <div class="flex items-center justify-between gap-3 p-3 rounded-2xl bg-ivory/70 dark:bg-white/5 border border-taupe/70 dark:border-white/10">
+                      <div class="flex items-center gap-3 min-w-0">
+                        <div class="w-10 h-10 rounded-xl bg-white dark:bg-white/10 flex items-center justify-center shrink-0">${renderItemThumbnail(item, 'w-8 h-8')}</div>
+                        <div class="min-w-0">
+                          <div class="text-xs font-semibold truncate">${escapeHtml(item.name)}</div>
+                          <div class="text-[10px] text-neutral-400">$${item.price} · ${escapeHtml(item.category)}</div>
+                        </div>
+                      </div>
+                      <button onclick="sendGarmentToStudio('${item.id}')" class="px-3 py-1.5 rounded-xl bg-obsidian text-alabaster dark:bg-champagne dark:text-obsidian text-[11px] font-semibold shrink-0">Style Now</button>
+                    </div>`).join('')}
+                </div>
+              ` : `<p class="text-xs text-emerald-600 dark:text-emerald-400 font-medium">✓ Every garment in your archive has been worn at least once!</p>`}
+            </div>
+
+            <div class="lg:col-span-6 p-6 rounded-3xl bg-white dark:bg-obsidianCard border border-taupe dark:border-white/10 shadow-editorial space-y-4">
+              <div>
+                <span class="text-[10px] uppercase tracking-widest text-champagne font-semibold">Chromatic Breakdown</span>
+                <h3 class="font-serif text-xl font-medium">Color Palette Chart</h3>
+              </div>
+              <div class="w-full h-5 rounded-full overflow-hidden flex border border-taupe dark:border-white/10">
+                ${palette.map(p => `<div style="width:${(p.count / Math.max(1, state.wardrobe.length)) * 100}%; background:${p.hex}" title="${escapeHtml(p.name)} (${p.count})"></div>`).join('')}
+              </div>
+              <div class="space-y-2 pt-1">
+                ${palette.slice(0, 6).map(p => {
+                  const pct = Math.round((p.count / Math.max(1, state.wardrobe.length)) * 100);
+                  return `
+                    <div class="flex items-center gap-3 text-xs">
+                      <span class="w-3.5 h-3.5 rounded-full border border-black/15 shrink-0" style="background:${p.hex}"></span>
+                      <span class="w-28 truncate font-medium">${escapeHtml(p.name)}</span>
+                      <div class="flex-1 h-2 rounded-full bg-ivory dark:bg-white/10 overflow-hidden"><div class="h-full rounded-full" style="width:${pct}%; background:${p.hex}"></div></div>
+                      <span class="w-10 text-right text-neutral-400">${pct}%</span>
+                    </div>`;
+                }).join('')}
+              </div>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    function assignLookToDay(day, lookId) { if (!lookId) return; state.weeklyPlan[day] = { lookId, worn: false }; persistState(); renderActiveView(); showToast(`Assigned look to ${day}`, 'gold'); }
+    function clearCalendarDay(day) { delete state.weeklyPlan[day]; persistState(); renderActiveView(); }
+    function markDayWorn(day) {
+      const plan = state.weeklyPlan[day]; if (!plan || plan.worn) return;
+      plan.worn = true;
+      const look = state.savedLooks.find(l => l.id === plan.lookId);
+      if (look) look.itemIds.forEach(id => { const item = getItemById(id); if (item) item.wears = (Number(item.wears) || 0) + 1; });
+      persistState(); renderActiveView();
+      showToast(`Logged wears for ${day}'s outfit!`, 'gold');
+    }
+
+    // =========================================================================
+    // 13. EXPOSE GLOBAL HANDLERS & INITIALIZE
+    // =========================================================================
+    Object.assign(window, {
+      switchTab, toggleTheme, openSyncModal, closeSyncModal, handleGoogleSignIn, handleCloudSignOut,
+      openWeatherDrawer, closeWeatherDrawer, detectLocalWeather, searchWeatherCity,
+      updateManualTempFromC, updateManualTempInput, toggleTempUnit, selectManualCondition, resetToLiveWeather, styleForActiveWeather,
+      openAddItemModal, closeAddItemModal, handlePhotoUpload, applyStudioCutout, restoreOriginalUpload, clearUploadedPhoto,
+      enhanceToStudioFlatLay, scanUploadedGarment, handleAddItemSubmit,
+      openGarmentDrawer, closeGarmentDrawer, logItemWear, sendGarmentToStudio, saveGarmentEdits, deleteWardrobeItem,
+      handleChatSubmit, sendStylistPrompt, openChatOutfitInStudio, saveChatOutfitLook,
+      setStudioMode, openSlotPicker, closeSlotPicker, selectStudioItem, clearStudioSlot, toggleStudioLock,
+      shuffleStudio, aiCompleteStudioLook, handleTryOnUserPhoto, generateTryOnPreview, exportLookbookPNG,
+      openSaveLookModal, closeSaveLookModal, confirmSaveStudioLook, loadSavedLookIntoStudio, deleteSavedLook,
+      updateCollageTransform, shiftCollageLayer, syncCollageFromSlots,
+      runGapAnalysis, openWishlistModal, closeWishlistModal, handleAddWishlistSubmit, addGapToWishlist, testGapInStudio, testWishlistInStudio, moveWishlistToCloset, deleteWishlistItem,
+      generateTripPlan, togglePackCheck,
+      assignLookToDay, clearCalendarDay, markDayWorn
+    });
+
+    // Boot App
+    applyTheme();
+    syncCollageFromSlots();
+    renderNavigation();
+    updateSidebarStats();
+    renderActiveView();
+    detectLocalWeather();
+    initCloudSync();
+  </script>
+</body>
+</html>

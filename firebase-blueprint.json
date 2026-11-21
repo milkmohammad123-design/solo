@@ -1,0 +1,180 @@
+{
+  "entities": {
+    "UserProfile": {
+      "title": "UserProfile",
+      "description": "User Style DNA, 12-Season Color Analysis palette, fit preferences, budget, and local virtual model image reference.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "description": "Owner Firebase Auth UID" },
+        "displayName": { "type": "string", "description": "User display name" },
+        "seasonPalette": { "type": "string", "description": "Assigned 12-Season Color Palette name" },
+        "undertone": { "type": "string", "description": "Skin undertone (Warm, Cool, Neutral)" },
+        "contrastLevel": { "type": "string", "description": "Feature contrast level (High, Medium, Low)" },
+        "hairEyeDepth": { "type": "string", "description": "Hair and eye depth summary" },
+        "paletteSummary": { "type": "string", "description": "Editorial color analysis summary" },
+        "powerColors": { "type": "array", "description": "Up to 12 hex codes of power colors" },
+        "neutralColors": { "type": "array", "description": "Up to 12 hex codes of neutral colors" },
+        "avoidColors": { "type": "array", "description": "Up to 12 hex codes of colors to avoid" },
+        "archetypes": { "type": "array", "description": "Selected style archetypes" },
+        "silhouette": { "type": "string", "description": "Preferred silhouette (Tailored, Relaxed, Oversized)" },
+        "heightCm": { "type": "number", "description": "User height in cm" },
+        "proportions": { "type": "string", "description": "Body proportion notes" },
+        "monthlyBudget": { "type": "number", "description": "Monthly shopping budget in USD" },
+        "virtualModelImagePath": { "type": "string", "description": "Device-local file path to saved full-body virtual model photo" },
+        "darkMode": { "type": "boolean", "description": "Obsidian dark mode preference" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Server timestamp on create" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Server timestamp on update" }
+      },
+      "required": ["userId", "archetypes", "silhouette", "seasonPalette", "monthlyBudget", "createdAt", "updatedAt"]
+    },
+    "GarmentItem": {
+      "title": "GarmentItem",
+      "description": "A garment in the user's digital wardrobe with availability status, CPW tracking, care notes, and local image path.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "brand": { "type": "string" },
+        "category": { "type": "string", "enum": ["Outerwear", "Tops", "Bottoms", "Footwear", "Bags", "Accessories"] },
+        "subCategory": { "type": "string" },
+        "colorName": { "type": "string" },
+        "colorHex": { "type": "string" },
+        "fabric": { "type": "string" },
+        "season": { "type": "string" },
+        "formality": { "type": "integer", "description": "Formality rating from 1 to 5" },
+        "price": { "type": "number" },
+        "wears": { "type": "integer" },
+        "status": { "type": "string", "enum": ["AVAILABLE", "IN_LAUNDRY", "AT_TAILOR", "OFF_SEASON"] },
+        "careInstructions": { "type": "string" },
+        "careNotes": { "type": "string" },
+        "tags": { "type": "array" },
+        "localImagePath": { "type": "string" },
+        "lastWornEpochMs": { "type": "integer" },
+        "purchasedEpochMs": { "type": "integer" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "name", "category", "colorName", "colorHex", "season", "formality", "price", "wears", "status", "createdAt", "updatedAt"]
+    },
+    "SavedLook": {
+      "title": "SavedLook",
+      "description": "Curated outfit saved into a lookbook collection.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "occasion": { "type": "string" },
+        "collectionName": { "type": "string" },
+        "harmonyScore": { "type": "integer" },
+        "itemIds": { "type": "array" },
+        "notes": { "type": "string" },
+        "localTryOnImagePath": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "title", "occasion", "collectionName", "harmonyScore", "itemIds", "createdAt", "updatedAt"]
+    },
+    "CalendarEntry": {
+      "title": "CalendarEntry",
+      "description": "Daily outfit schedule entry with occasion, companions, and worn tracking.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "dateKey": { "type": "string" },
+        "lookId": { "type": "string" },
+        "lookTitle": { "type": "string" },
+        "itemIds": { "type": "array" },
+        "occasion": { "type": "string" },
+        "whoYouSaw": { "type": "string" },
+        "worn": { "type": "boolean" },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "dateKey", "lookTitle", "itemIds", "worn", "createdAt", "updatedAt"]
+    },
+    "WishlistItem": {
+      "title": "WishlistItem",
+      "description": "Prospective shopping piece or AI multiplier recommendation.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "name": { "type": "string" },
+        "brand": { "type": "string" },
+        "category": { "type": "string", "enum": ["Outerwear", "Tops", "Bottoms", "Footwear", "Bags", "Accessories"] },
+        "colorName": { "type": "string" },
+        "colorHex": { "type": "string" },
+        "price": { "type": "number" },
+        "reason": { "type": "string" },
+        "unlocks": { "type": "string" },
+        "verdict": { "type": "string" },
+        "localImagePath": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "name", "category", "colorName", "colorHex", "price", "createdAt", "updatedAt"]
+    },
+    "TripPlan": {
+      "title": "TripPlan",
+      "description": "Capsule trip packing matrix and day-by-day outfit itinerary.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "destination": { "type": "string" },
+        "days": { "type": "integer" },
+        "climate": { "type": "string" },
+        "activities": { "type": "string" },
+        "bagSize": { "type": "string" },
+        "packingItemIds": { "type": "array" },
+        "checkedItemIds": { "type": "array" },
+        "itineraryLines": { "type": "array" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "destination", "days", "climate", "bagSize", "packingItemIds", "checkedItemIds", "createdAt", "updatedAt"]
+    },
+    "OotdFeedback": {
+      "title": "OotdFeedback",
+      "description": "User swipe preference on Daily OOTD recommendations to weight future styling.",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "title": { "type": "string" },
+        "action": { "type": "string", "enum": ["LOVE", "SKIP", "WEAR"] },
+        "itemIds": { "type": "array" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "action", "itemIds", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/UserProfile" },
+      "description": "User Style DNA, color palette, and settings profile."
+    },
+    "/users/{userId}/garments/{garmentId}": {
+      "schema": { "$ref": "#/entities/GarmentItem" },
+      "description": "User's digital wardrobe garments."
+    },
+    "/users/{userId}/looks/{lookId}": {
+      "schema": { "$ref": "#/entities/SavedLook" },
+      "description": "Saved looks and lookbook collections."
+    },
+    "/users/{userId}/calendar/{dateKey}": {
+      "schema": { "$ref": "#/entities/CalendarEntry" },
+      "description": "Monthly calendar daily outfit logs."
+    },
+    "/users/{userId}/wishlist/{wishlistId}": {
+      "schema": { "$ref": "#/entities/WishlistItem" },
+      "description": "Smart shopping wishlist and gap pieces."
+    },
+    "/users/{userId}/trips/{tripId}": {
+      "schema": { "$ref": "#/entities/TripPlan" },
+      "description": "Capsule trip packing plans."
+    },
+    "/users/{userId}/ootd_feedback/{feedbackId}": {
+      "schema": { "$ref": "#/entities/OotdFeedback" },
+      "description": "Daily OOTD swipe feedback history."
+    }
+  }
+}
